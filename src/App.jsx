@@ -51,6 +51,14 @@ function App() {
     })
   };
 
+  const postCard = (newCardData) => {
+    // make a call to backend to create a new card
+    // then reset cards to trigger to rerender
+    const newCard = { ... newCardData, likeCount: 0}
+    setCards(cards => {
+      return [ ...cards, newCard]
+    })
+  };
   return (
     <>
       <header>
@@ -67,7 +75,7 @@ function App() {
         />
       </section>      
       <NewBoardForm onPostBoard={postBoard}/>
-      <NewCardForm />
+      <NewCardForm onPostCard={postCard}/>
       <div className="card">
       </div>
     </>
