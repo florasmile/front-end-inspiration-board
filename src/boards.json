@@ -1,26 +1,26 @@
 [
   {
-    "board_id": 1,
+    "id": 1,
     "title": "Travel Inspiration",
     "owner": "Alice"
   },
   {
-    "board_id": 2,
+    "id": 2,
     "title": "UI Design Ideas",
     "owner": "Bob"
   },
   {
-    "board_id": 3,
+    "id": 3,
     "title": "Recipe Collection",
     "owner": "Charlie"
   },
   {
-    "board_id": 4,
+    "id": 4,
     "title": "Fitness Goals",
     "owner": "Dana"
   },
   {
-    "board_id": 5,
+    "id": 5,
     "title": "Book Recommendations",
     "owner": "Eve"
   }
