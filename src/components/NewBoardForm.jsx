@@ -46,4 +46,7 @@ const NewBoardForm = ( { onPostBoard }) => {
   </section>;
 };
 
+NewBoardForm.propTypes = {
+  onPostBoard: PropTypes.func.isRequired,
+};
 export default NewBoardForm;
