@@ -43,6 +43,13 @@ function App() {
       return cards.filter(card => card.id !== id);
     });
   };
+  const postBoard = (formData) => {
+    // make a post request to backend API to create a new board
+    // reset boards to trigger rerender
+    setBoards(boards => {
+      return [ ...boards, formData]
+    })
+  };
 
   return (
     <>
@@ -59,7 +66,7 @@ function App() {
           deleteCard={deleteCard}
         />
       </section>      
-      <NewBoardForm />
+      <NewBoardForm onPostBoard={postBoard}/>
       <NewCardForm />
       <div className="card">
       </div>

@@ -1,5 +1,5 @@
-const newCardForm = () => {
+const NewCardForm = () => {
   return ;
 };
 
-export default newCardForm;
+export default NewCardForm;
