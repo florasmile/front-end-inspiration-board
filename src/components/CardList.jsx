@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Card from './Card';
 
-const CardList = ({ cards }) => {
+const CardList = ({ cards, increaseLikeCount, deleteCard }) => {
   const getCardListJSX = (cards) => {
     return cards.map((card) => {
       return (
@@ -9,6 +9,9 @@ const CardList = ({ cards }) => {
           key={card.id}
           id={card.id}
           message={card.message}
+          likeCount={card.likeCount}
+          increaseLikeCount={increaseLikeCount}
+          deleteCard={deleteCard}
         />
       );
     })
@@ -24,7 +27,10 @@ CardList.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       message: PropTypes.string.isRequired,
+      likeCount: PropTypes.number.isRequired,
     })
   ).isRequired,
+  increaseLikeCount:PropTypes.func.isRequired,
+  deleteCard:PropTypes.func.isRequired,
 };
 export default CardList;

@@ -22,6 +22,28 @@ function App() {
     // send API calls to get a list of cards of current board to display; and call setCards
 
   };
+
+  const increaseLikeCount = (id) => {
+    // when user click +1, we make a patch request to backend API to increase the likeCount of a card by 1
+    // then we reset the cards by iterate through cards and find the matching card, update the reference of cards, trigger rerender of cardlist
+    setCards(cards => {
+      return cards.map(card => {
+        if (card.id === id){
+          return { ...card, likeCount: card.likeCount+1 }
+        } else {
+          return card;
+        }
+      });
+    });
+  };
+  const deleteCard = (id) => {
+    // when user clicks "delete" button, we make a delete request to backend API to delete a card
+    // front end: we need to reset cards, trigger rerender
+    setCards(cards => {
+      return cards.filter(card => card.id !== id);
+    });
+  };
+
   return (
     <>
       <header>
@@ -31,7 +53,11 @@ function App() {
       <section>
         <h2>Current Board</h2>
         <p>{curBoard.title} - {curBoard.owner}</p>
-        <CardList cards={cards}/>
+        <CardList 
+          cards={cards} 
+          increaseLikeCount={increaseLikeCount}
+          deleteCard={deleteCard}
+        />
       </section>      
       <NewBoardForm />
       <NewCardForm />
