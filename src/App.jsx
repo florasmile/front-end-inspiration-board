@@ -12,7 +12,8 @@ function App() {
   const [curBoard, setCurBoard] = useState(boards[0]);
   const [cards, setCards] = useState(CARDS);
   const [showBoardForm, setShowBoardForm] = useState(false);
-  
+  const [showCardForm, setShowCardForm] = useState(false);
+
 
   const displayBoard = (id) => {
     // when a board is selected, we want to display its title, owner's name, and all cards;
@@ -50,7 +51,7 @@ function App() {
     // reset boards to trigger rerender
     setBoards(boards => {
       return [ ...boards, formData]
-    })
+    });
     toggleBoardFormDisplay();
   };
 
@@ -60,12 +61,18 @@ function App() {
     const newCard = { ... newCardData, likeCount: 0}
     setCards(cards => {
       return [ ...cards, newCard]
-    })
+    });
+    toggleCardFormDisplay();
   };
 
   const toggleBoardFormDisplay = () => {
     setShowBoardForm(showBoardForm => !showBoardForm);
   };
+
+  const toggleCardFormDisplay = () => {
+    setShowCardForm(showCardForm => !showCardForm);
+  };
+
   return (
     <>
       <header>
@@ -88,7 +95,13 @@ function App() {
         {showBoardForm && 
           <NewBoardForm onPostBoard={postBoard}/>
         }
-      <NewCardForm onPostCard={postCard}/>
+        {
+          !showCardForm && 
+            <button onClick={toggleCardFormDisplay}>+ Create a new Card</button>  
+        } 
+        {showCardForm && 
+          <NewCardForm onPostCard={postCard}/>
+        }
       <div className="card">
       </div>
     </>
