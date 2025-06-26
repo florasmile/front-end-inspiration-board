@@ -1,3 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 import { useState } from 'react';
 import './App.css';
 import BoardList from './components/BoardList';
@@ -13,7 +16,6 @@ function App() {
   const [cards, setCards] = useState(CARDS);
   const [showBoardForm, setShowBoardForm] = useState(false);
   const [showCardForm, setShowCardForm] = useState(false);
-
 
   const displayBoard = (id) => {
     // when a board is selected, we want to display its title, owner's name, and all cards;
@@ -74,37 +76,55 @@ function App() {
   };
 
   return (
-    <>
-      <header>
-        <h1>Inspiration Board</h1>
-      </header>
-      <BoardList boards={boards} displayBoard={displayBoard}/>
-      <section>
-        <h2>Current Board</h2>
-        <p>{curBoard.title} - {curBoard.owner}</p>
-        <CardList 
+    <main className="container-fluid vh-100"> 
+    <div className="row h-100 g-3">
+      {/* Left Column */}
+      <section className="col-md d-flex flex-column">
+         {/* Row 1 - Header */}
+        <h1 className="flex-shrink-0">Boards</h1>
+          {/* Row 2 - Content (will expand) */}
+        <div className="flex-grow-1 overflow-auto">
+          <BoardList boards={boards} displayBoard={displayBoard}/>
+        </div>
+          {/* Row 3 * can add className="flex-shrink-0" */}
+        <div>
+          {
+            !showBoardForm && 
+              <button onClick={toggleBoardFormDisplay}>+ Create a new board</button>  
+          } 
+          {showBoardForm && 
+            <NewBoardForm onPostBoard={postBoard}/>
+          }
+        </div>
+      </section>
+
+      {/* Right Column */}
+      <section className="col-md d-flex flex-column">
+         {/* Row 1 - Header */}
+        <h3 className="flex-shrink-0">{curBoard.title} - {curBoard.owner}</h3>
+         {/* Row 2 - Content (will expand) */}
+        <div className="flex-grow-1 overflow-auto">
+          <CardList 
           cards={cards} 
           increaseLikeCount={increaseLikeCount}
           deleteCard={deleteCard}
-        />
-      </section>  
-        {
-          !showBoardForm && 
-            <button onClick={toggleBoardFormDisplay}>+ Create a new board</button>  
-        } 
-        {showBoardForm && 
-          <NewBoardForm onPostBoard={postBoard}/>
-        }
-        {
+        />        
+        </div>
+        {/* Row 3*/}
+        <div>
+          {
           !showCardForm && 
             <button onClick={toggleCardFormDisplay}>+ Create a new Card</button>  
-        } 
-        {showCardForm && 
-          <NewCardForm onPostCard={postCard}/>
-        }
-      <div className="card">
-      </div>
-    </>
+          } 
+          {showCardForm && 
+            <NewCardForm onPostCard={postCard}/>
+          }
+        </div>
+
+      </section>  
+    </div>
+      
+    </main>
   )
 }
 

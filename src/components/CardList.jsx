@@ -17,7 +17,7 @@ const CardList = ({ cards, increaseLikeCount, deleteCard }) => {
     })
   };
 
-  return <ul className="cardlist-container">
+  return <ul className="d-flex flex-wrap gap-3 list-unstyled">
     { getCardListJSX (cards)}
   </ul>
 };

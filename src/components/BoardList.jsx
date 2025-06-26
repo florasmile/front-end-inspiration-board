@@ -15,7 +15,7 @@ const BoardList = ({ boards, displayBoard }) => {
       );
     })
   };
-  return <ul>
+  return <ul className="list-unstyled">
     { getBoardListJSX(boards)}
   </ul>
 };

@@ -1,3 +1,13 @@
-.card-container {
-  background-color: coral;
+.cardContainer {
+  width: 250px;
+  min-height: 200px;
+  background-color: rgba(211, 170, 170, 0.85);
+  backdrop-filter: blur(2px);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.cardContainer:hover {
+  background-color: rgba(255, 255, 255, 0.95);
+  transform: scale(1.02);
 }
