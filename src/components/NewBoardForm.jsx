@@ -32,7 +32,7 @@ const NewBoardForm = ( { onPostBoard }) => {
         />
       </div>
       <div>
-        <label htmlFor="board-owner">"Owner's Name"</label>
+        <label htmlFor="board-owner">Owner</label>
         <input
           id="board-owner"
           type="text"

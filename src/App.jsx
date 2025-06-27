@@ -1,22 +1,61 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import BoardList from './components/BoardList';
 import CardList from './components/CardList';
 import NewBoardForm from './components/NewBoardForm';
 import NewCardForm from './components/NewCardForm';
-import BOARDS from './boards.json';
-import CARDS from './cards.json';
+// import BOARDS from './boards.json';
+// import CARDS from './cards.json';
+import { getAllBoardsApi, postBoardApi } from './services/boardApi';
+import { postCardApi, getCardsApi, deleteCardApi, addCardLikesApi } from './services/cardApi';
 
+
+const convertCardData = ({ id, likes_count, message }) => {
+  const converted = { id, message, likeCount: likes_count };
+  return converted;
+}
 function App() {
-  const [boards, setBoards] = useState(BOARDS);
-  const [curBoard, setCurBoard] = useState(boards[0]);
-  const [cards, setCards] = useState(CARDS);
+  const [boards, setBoards] = useState([]);
+  const [curBoard, setCurBoard] = useState({
+    title: '',
+    owner: '',
+  });
+  const [cards, setCards] = useState([]);
   const [showBoardForm, setShowBoardForm] = useState(false);
   const [showCardForm, setShowCardForm] = useState(false);
 
+  const getAllBoards = async () => {
+    //call Api to get all boards
+    // use data from backend to set boards
+    try {
+      const data = await getAllBoardsApi();
+      console.log(data);
+      setBoards(data);
+    } catch(error){
+      console.log('failed to get Boards from server', error);
+    }
+  };
+
+  useEffect(() => {
+    getAllBoards();
+  }, []);
+
+  useEffect(() => {
+    if (boards.length > 0) {
+      setCurBoard(boards[0]);
+      console.log(boards[0]);
+    }
+  }, [boards]);
+
+  useEffect(() => {
+    fetchCards();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [curBoard]);
+
+  
   const displayBoard = (id) => {
     // when a board is selected, we want to display its title, owner's name, and all cards;
     setCurBoard(() => {
@@ -28,43 +67,61 @@ function App() {
 
   };
 
-  const increaseLikeCount = (id) => {
+  const increaseLikeCount = async (id) => {
     // when user click +1, we make a patch request to backend API to increase the likeCount of a card by 1
-    // then we reset the cards by iterate through cards and find the matching card, update the reference of cards, trigger rerender of cardlist
-    setCards(cards => {
-      return cards.map(card => {
-        if (card.id === id){
-          return { ...card, likeCount: card.likeCount+1 }
-        } else {
-          return card;
-        }
-      });
-    });
+    try {
+      const data =  await addCardLikesApi(id);
+      console.log(data);
+      fetchCards();
+      console.log(cards);
+    } catch(error) {
+      console.log(error);
+    };
   };
-  const deleteCard = (id) => {
-    // when user clicks "delete" button, we make a delete request to backend API to delete a card
-    // front end: we need to reset cards, trigger rerender
-    setCards(cards => {
-      return cards.filter(card => card.id !== id);
-    });
-  };
-  const postBoard = (formData) => {
-    // make a post request to backend API to create a new board
-    // reset boards to trigger rerender
-    setBoards(boards => {
-      return [ ...boards, formData]
-    });
+  
+  const postBoard = async (newBoardData) => {
+    try {
+      const data = await postBoardApi(newBoardData);
+      setBoards(prevBoards => [...prevBoards, data]);
+      setCurBoard(boards[0]);
+    } catch(error){
+      console.log('failed to create a new board', error);
+    }
     toggleBoardFormDisplay();
   };
 
-  const postCard = (newCardData) => {
+  const postCard = async (newCardData) => {
     // make a call to backend to create a new card
-    // then reset cards to trigger to rerender
-    const newCard = { ... newCardData, likeCount: 0}
-    setCards(cards => {
-      return [ ...cards, newCard]
-    });
+    try {
+      await postCardApi(newCardData, curBoard.id);
+      // setCurBoard(prevBoard => ({...prevBoard}));//getCards from backend to trigger rerender
+      fetchCards();
+    } catch(error) {
+      console.log(error);
+    }
     toggleCardFormDisplay();
+  }
+
+  const fetchCards = async () => {
+    if (curBoard && curBoard.id) {
+        try{
+          const fetchCards = await getCardsApi(curBoard.id);
+          setCards(fetchCards.map(card => convertCardData(card)));
+        } catch (error) {
+          console.log(error);
+          setCards([]);
+        }
+      }
+  };
+
+  const deleteCard = async (id) => {
+    // when user clicks "delete" button, we make a delete request to backend API to delete a card
+    try {
+      await deleteCardApi(id)
+      await fetchCards();
+    } catch(error) {
+      console.log(error)
+    }
   };
 
   const toggleBoardFormDisplay = () => {
