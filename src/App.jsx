@@ -15,6 +15,8 @@ import { postCardApi, getCardsApi, deleteCardApi, addCardLikesApi } from './serv
 
 const convertCardData = ({ id, likes_count, message }) => {
   const converted = { id, message, likeCount: likes_count };
+
+  console.log('converted data', converted)
   return converted;
 }
 function App() {
@@ -71,7 +73,7 @@ function App() {
     // when user click +1, we make a patch request to backend API to increase the likeCount of a card by 1
     try {
       const data =  await addCardLikesApi(id);
-      console.log(data);
+      console.log('data from backend',data);
       fetchCards();
       console.log(cards);
     } catch(error) {
