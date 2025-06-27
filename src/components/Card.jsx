@@ -5,10 +5,10 @@ const Card = ({ id, message, likeCount, increaseLikeCount, deleteCard}) => {
   return <li className="card h-100 cardContainer">
     <p>{message}</p>
     <div>
-      <span>{likeCount} 💕</span>
-      <button onClick={()=> increaseLikeCount(id)}>+1</button>
-      <button onClick={() => deleteCard(id)}>delete</button>
-    </div>    
+      <span className="likeCount">❤️ {likeCount}</span>
+      <button className="likeButton" onClick={() => increaseLikeCount(id)}>➕</button>
+      <button className="deleteButton" onClick={() => deleteCard(id)} title="Delete">❌</button>
+    </div>
   </li>;
 };
 
