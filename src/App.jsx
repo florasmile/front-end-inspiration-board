@@ -19,6 +19,11 @@ const convertCardData = ({ id, likes_count, message }) => {
   console.log('converted data', converted)
   return converted;
 }
+import Header from './components/Header';
+import Footer from './components/Footer';
+import BOARDS from './boards.json';
+import CARDS from './cards.json';
+
 function App() {
   const [boards, setBoards] = useState([]);
   const [curBoard, setCurBoard] = useState({
@@ -135,55 +140,43 @@ function App() {
   };
 
   return (
-    <main className="container-fluid vh-100"> 
-    <div className="row h-100 g-3">
-      {/* Left Column */}
-      <section className="col-md d-flex flex-column">
-         {/* Row 1 - Header */}
-        <h1 className="flex-shrink-0">Boards</h1>
-          {/* Row 2 - Content (will expand) */}
-        <div className="flex-grow-1 overflow-auto">
+    <div className="app-wrapper">
+      <Header />
+      <main className="main-layout">
+        <section className="board-section">
+          <h1>Boards</h1>
           <BoardList boards={boards} displayBoard={displayBoard}/>
-        </div>
-          {/* Row 3 * can add className="flex-shrink-0" */}
-        <div>
-          {
-            !showBoardForm && 
-              <button onClick={toggleBoardFormDisplay}>+ Create a new board</button>  
-          } 
-          {showBoardForm && 
-            <NewBoardForm onPostBoard={postBoard}/>
-          }
-        </div>
-      </section>
+          <div>
+            {
+              !showBoardForm && 
+                <button onClick={toggleBoardFormDisplay}>+ Create a new board</button>  
+            } 
+            {showBoardForm && 
+              <NewBoardForm onPostBoard={postBoard}/>
+            }
+          </div>
+        </section>
 
-      {/* Right Column */}
-      <section className="col-md d-flex flex-column">
-         {/* Row 1 - Header */}
-        <h3 className="flex-shrink-0">{curBoard.title} - {curBoard.owner}</h3>
-         {/* Row 2 - Content (will expand) */}
-        <div className="flex-grow-1 overflow-auto">
+        <section className="card-section">
+          <h3>{curBoard.title} - {curBoard.owner}</h3>
           <CardList 
-          cards={cards} 
-          increaseLikeCount={increaseLikeCount}
-          deleteCard={deleteCard}
-        />        
-        </div>
-        {/* Row 3*/}
-        <div>
-          {
-          !showCardForm && 
-            <button onClick={toggleCardFormDisplay}>+ Create a new Card</button>  
-          } 
-          {showCardForm && 
-            <NewCardForm onPostCard={postCard}/>
-          }
-        </div>
-
-      </section>  
+            cards={cards} 
+            increaseLikeCount={increaseLikeCount}
+            deleteCard={deleteCard}
+          />        
+          <div>
+            {
+              !showCardForm && 
+                <button onClick={toggleCardFormDisplay}>+ Create a new Card</button>  
+            } 
+            {showCardForm && 
+              <NewCardForm onPostCard={postCard}/>
+            }
+          </div>
+        </section>  
+      </main>
+      <Footer />
     </div>
-      
-    </main>
   )
 }
 

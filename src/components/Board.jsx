@@ -4,12 +4,13 @@ const Board = ({ id, title, displayBoard }) => {
 
   return (
     <li className="boards__item">
-      <button
-        onClick={() => displayBoard(id)}
-      >
-        {title}
-      </button>
-    </li>
+  <button
+    className="board"        // ← добавляем
+    onClick={() => displayBoard(id)}
+  >
+    {title}
+  </button>
+</li>
   );
 };
 
