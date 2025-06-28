@@ -1,26 +1,35 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import './NewCardForm.css';
 
 const NewCardForm = ({ onPostCard }) => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const handleChange = (event) => {
-    setMessage(event.target.value);
-    setError('');
+    setMessage(event.target.value);    
+    if(error){
+      setError(validate(event.target.value));
+    }
   };
   
+  const validate = (value) => {
+    if (!value.trim()) {
+      return 'This field is required';
+    }
+    if (value.length > 40) {
+      return 'Maximum 40 characters allowed';
+    }
+    return '';
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(message.length > 40) {
-      setError('Message cannot exceed 40 characters');
-      return;
-    };
-    if(message.length == 0) {
-      setError('Message cannot be empty');
-      return;
+    const validationError = validate(message);
+    setError(validationError);
+    if (!validationError) {
+      onPostCard({message});
+      setMessage('');
     }
-    onPostCard({message});
-    setMessage('');
   };
 
   return (
@@ -28,17 +37,27 @@ const NewCardForm = ({ onPostCard }) => {
       <h2>Create a new card</h2>
       <form onSubmit={handleSubmit}>
         <div>
-        <label htmlFor="card-message">Message</label>
-        <input
-          id="card-message"
-          type="text"
-          name="message"
-          value={message}
-          onChange={handleChange}
-        />
-        {error && <div>{error}</div>}
+          <label htmlFor="card-message">Message</label>
+          <input
+            id="card-message"
+            type="text"
+            name="message"
+            value={message}
+            onChange={handleChange}
+            onBlur={() => setError(validate(message))}
+            maxLength={41}
+            placeholder="Type your message..."
+            className={error ? 'error': ''}
+          />        
+          <div className="message-feedback">
+            {error ? (
+              <span className="error">{error}</span>
+              ) : (
+              <span className="char-count">{message.length}/40</span>
+            )}
+          </div>
       </div>
-      <button>Submit</button>
+      <button type="submit" disabled={!message.trim()}>Submit</button>
       </form>
     </section>
   );
