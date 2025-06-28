@@ -7,22 +7,18 @@ import BoardList from './components/BoardList';
 import CardList from './components/CardList';
 import NewBoardForm from './components/NewBoardForm';
 import NewCardForm from './components/NewCardForm';
-// import BOARDS from './boards.json';
-// import CARDS from './cards.json';
 import { getAllBoardsApi, postBoardApi } from './services/boardApi';
 import { postCardApi, getCardsApi, deleteCardApi, addCardLikesApi } from './services/cardApi';
 
-
-const convertCardData = ({ id, likes_count, message }) => {
-  const converted = { id, message, likeCount: likes_count };
-
-  console.log('converted data', converted)
-  return converted;
-}
 import Header from './components/Header';
 import Footer from './components/Footer';
-import BOARDS from './boards.json';
-import CARDS from './cards.json';
+import MoodSelector from './components/MoodSelector';
+
+const kDefaultBackgroundImg = `url(${new URL('./assets/default.jpg', import.meta.url).href})`;
+const convertCardData = ({ id, likes_count, message }) => {
+  const converted = { id, message, likeCount: likes_count };
+  return converted;
+}
 
 function App() {
   const [boards, setBoards] = useState([]);
@@ -33,7 +29,9 @@ function App() {
   const [cards, setCards] = useState([]);
   const [showBoardForm, setShowBoardForm] = useState(false);
   const [showCardForm, setShowCardForm] = useState(false);
+  const [backgroundImg, setBackgroundImg] = useState(kDefaultBackgroundImg);
 
+  console.log(backgroundImg);
   const getAllBoards = async () => {
     //call Api to get all boards
     // use data from backend to set boards
@@ -139,9 +137,15 @@ function App() {
     setShowCardForm(showCardForm => !showCardForm);
   };
 
+  const changeMood = (moodName) => {
+    setBackgroundImg(`url(${new URL(`./assets/${moodName}.jpg`, import.meta.url).href})`);
+  };
+
   return (
-    <div className="app-wrapper">
-      <Header />
+    <div className="app-wrapper" style={{
+      backgroundImage:backgroundImg
+    }}>
+      <Header />      
       <main className="main-layout">
         <section className="board-section">
           <h1>Boards</h1>
@@ -158,6 +162,7 @@ function App() {
         </section>
 
         <section className="card-section">
+          <MoodSelector onMoodChange={changeMood}/>
           <h3>{curBoard.title} - {curBoard.owner}</h3>
           <CardList 
             cards={cards} 
