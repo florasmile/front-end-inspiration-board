@@ -7,9 +7,7 @@ const NewCardForm = ({ onPostCard }) => {
   const [error, setError] = useState('');
   const handleChange = (event) => {
     setMessage(event.target.value);    
-    if(error){
-      setError(validate(event.target.value));
-    }
+    setError(validate(event.target.value));
   };
   
   const validate = (value) => {

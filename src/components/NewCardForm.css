@@ -1,28 +1,11 @@
-.message-form {
-  max-width: 300px;
-}
 
 label {
   margin-right: 0.5em; /* add Horizontal space */
 }
-.message-form input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 4px;
-}
 
-.message-form input.error {
-  outline: 5px solid #ff4444;  /* Red outline */
+input.error {
+  outline: 2px solid #ff4444;  /* Red outline */
   /* border-color: #ff4444; */
-}
-
-.message-feedback {
-  /* display: flex;
-  justify-content: space-between; */
-  font-size: 0.8rem;
-  height: 20px;
 }
 
 .error {
