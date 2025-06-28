@@ -1,0 +1,137 @@
+/* --- КНОПКА ГАМБУРГЕРА --- */
+.open-drawer-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-family: 'Rock Salt', cursive;
+}
+
+/* --- ПАНЕЛЬ --- */
+.side-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 300px;
+  height: 100%;
+  background-color: rgba(159, 159, 158, 0.577);
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Rock Salt', cursive;
+  font-size: 0.9rem;
+  background-image: url('../assets/neutral.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.side-drawer.open {
+  right: 0;
+}
+
+/* --- ЗАКРЫВАЮЩИЙ КРЕСТИК --- */
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #ec2107;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* --- ЗАГОЛОВКИ ФОРМ --- */
+.side-drawer h2 {
+  font-size: 1.1rem;
+  margin: 1.2rem 0 0.5rem;
+  text-align: center;
+}
+
+/* --- РАЗДЕЛИТЕЛИ (только 2) --- */
+.side-drawer section:nth-of-type(2),
+.side-drawer section:nth-of-type(3) {
+  border-top: double 3px #fff;
+  padding-top: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+/* --- ЭЛЕМЕНТЫ ФОРМ --- */
+.side-drawer label {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+.side-drawer input,
+.side-drawer select {
+  display: block;
+  width: 100%;
+  margin: 0.3rem 0;
+  padding: 0.4rem;
+  font-size: 1rem;
+  font-family: 'Rock Salt', cursive;
+  border-radius: 0.4rem;
+  border: 1px solid #ccc;
+}
+
+/* --- КНОПКА SUBMIT --- */
+.side-drawer button[type="submit"] {
+  background-color: #ffff66;
+  color: #000;
+  font-weight: bold;
+  border: 2px solid #333;
+  padding: 0.3rem 0.8rem;
+  border-radius: 1.5rem;
+  font-family: 'Rock Salt', cursive;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin: 0.5rem auto;
+  display: block;
+}
+
+/* --- ОБЩЕЕ ОФОРМЛЕНИЕ СЕКЦИЙ --- */
+.side-drawer section {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-drawer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(142, 139, 139, 0.631); /* затемнение */
+  z-index: -1;
+}
+
+.icon-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.icon-buttons button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: yellow;
+  padding: 0.2rem;
+  transition: transform 0.2s;
+}
+
+.icon-buttons button:hover {
+  transform: scale(1.2);
+}

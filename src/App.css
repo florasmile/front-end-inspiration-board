@@ -7,10 +7,6 @@ html {
   height: 100%;
   width: 100%;
   font-family: 'Rock Salt', cursive;
-  background-image: url('./assets/default.jpg');
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  background-position: top center;
   color: #000;
 }
 
@@ -42,7 +38,7 @@ html {
   right: 0;
   height: 90px;
   background-color: #838381;
-  color: #fafaf6;
+  color: rgb(255, 255, 100);
   padding: 1rem;
   text-align: center;
   font-size: 2rem;
@@ -68,6 +64,11 @@ html {
   height: calc(100vh - 100px);
   overflow: hidden;
 
+  background-image: url('./assets/default.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top left;
+
 }
 
 .board-section {
@@ -79,7 +80,7 @@ html {
   overflow-y: auto;
 
   background-color: rgba(159, 159, 158, 0.577);
-  color: #fafaf6;
+  color: rgba(255, 255, 100);
   border-radius: 15px;
   padding: 1rem;
   box-sizing: border-box;
@@ -95,7 +96,7 @@ html {
   height: calc(100% - 2cm);
   overflow-y: auto;
   background-color: rgba(159, 159, 158, 0.577);
-  color: #fafaf6;
+  color: rgba(255, 255, 100);
   border-radius: 15px;
   padding: 1.5rem;
   box-sizing: border-box;
@@ -126,6 +127,6 @@ button.board {
 }
 
 button.board:hover {
-  background-color: rgba(255, 255, 100, 0.7);
+  background-color: rgba(255, 255, 100);
   color: #222;
 }

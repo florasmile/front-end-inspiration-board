@@ -1,5 +1,6 @@
 import './Card.css';
 import PropTypes from 'prop-types';
+
 const Card = ({ id, message, likeCount, increaseLikeCount, deleteCard}) => {
 
   return <li className="card h-100 cardContainer">

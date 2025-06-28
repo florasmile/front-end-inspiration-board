@@ -1,0 +1,24 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #777;
+  padding: 0.5rem 2rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 3rem;
+  color: #ffff66;
+  font-family: 'Rock Salt', cursive;
+}
+
+/* Перемещаем кнопку внутрь header и вправо */
+.open-drawer-button {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-family: 'Rock Salt', cursive;
+  color: black;
+}

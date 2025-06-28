@@ -7,6 +7,9 @@ import BoardList from './components/BoardList';
 import CardList from './components/CardList';
 import NewBoardForm from './components/NewBoardForm';
 import NewCardForm from './components/NewCardForm';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import SideDrawer from './components/SideDrawer';
 // import BOARDS from './boards.json';
 // import CARDS from './cards.json';
 import { getAllBoardsApi, postBoardApi } from './services/boardApi';
@@ -19,10 +22,6 @@ const convertCardData = ({ id, likes_count, message }) => {
   console.log('converted data', converted)
   return converted;
 }
-import Header from './components/Header';
-import Footer from './components/Footer';
-import BOARDS from './boards.json';
-import CARDS from './cards.json';
 
 function App() {
   const [boards, setBoards] = useState([]);
@@ -31,8 +30,8 @@ function App() {
     owner: '',
   });
   const [cards, setCards] = useState([]);
-  const [showBoardForm, setShowBoardForm] = useState(false);
-  const [showCardForm, setShowCardForm] = useState(false);
+  // const [showBoardForm, setShowBoardForm] = useState(false);
+  // const [showCardForm, setShowCardForm] = useState(false);
 
   const getAllBoards = async () => {
     //call Api to get all boards
@@ -41,7 +40,7 @@ function App() {
       const data = await getAllBoardsApi();
       console.log(data);
       setBoards(data);
-    } catch(error){
+    } catch (error) {
       console.log('failed to get Boards from server', error);
     }
   };
@@ -62,7 +61,7 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [curBoard]);
 
-  
+
   const displayBoard = (id) => {
     // when a board is selected, we want to display its title, owner's name, and all cards;
     setCurBoard(() => {
@@ -77,48 +76,53 @@ function App() {
   const increaseLikeCount = async (id) => {
     // when user click +1, we make a patch request to backend API to increase the likeCount of a card by 1
     try {
-      const data =  await addCardLikesApi(id);
-      console.log('data from backend',data);
+      const data = await addCardLikesApi(id);
+      console.log('data from backend', data);
       fetchCards();
       console.log(cards);
-    } catch(error) {
+    } catch (error) {
       console.log(error);
     };
   };
-  
+
   const postBoard = async (newBoardData) => {
     try {
       const data = await postBoardApi(newBoardData);
       setBoards(prevBoards => [...prevBoards, data]);
       setCurBoard(boards[0]);
-    } catch(error){
+    } catch (error) {
       console.log('failed to create a new board', error);
     }
-    toggleBoardFormDisplay();
+    // toggleBoardFormDisplay();
   };
+
+  const handleMoodChange = (newMood) => {
+  setMood(newMood);
+};
 
   const postCard = async (newCardData) => {
     // make a call to backend to create a new card
     try {
-      await postCardApi(newCardData, curBoard.id);
+      await postCardApi({ ...newCardData, boardId: curBoard.id });
+
       // setCurBoard(prevBoard => ({...prevBoard}));//getCards from backend to trigger rerender
       fetchCards();
-    } catch(error) {
+    } catch (error) {
       console.log(error);
     }
-    toggleCardFormDisplay();
+    // toggleCardFormDisplay();
   }
 
   const fetchCards = async () => {
     if (curBoard && curBoard.id) {
-        try{
-          const fetchCards = await getCardsApi(curBoard.id);
-          setCards(fetchCards.map(card => convertCardData(card)));
-        } catch (error) {
-          console.log(error);
-          setCards([]);
-        }
+      try {
+        const fetchCards = await getCardsApi(curBoard.id);
+        setCards(fetchCards.map(card => convertCardData(card)));
+      } catch (error) {
+        console.log(error);
+        setCards([]);
       }
+    }
   };
 
   const deleteCard = async (id) => {
@@ -126,54 +130,74 @@ function App() {
     try {
       await deleteCardApi(id)
       await fetchCards();
-    } catch(error) {
+    } catch (error) {
       console.log(error)
     }
   };
 
-  const toggleBoardFormDisplay = () => {
-    setShowBoardForm(showBoardForm => !showBoardForm);
-  };
+  // const toggleBoardFormDisplay = () => {
+  //   setShowBoardForm(showBoardForm => !showBoardForm);
+  // };
 
-  const toggleCardFormDisplay = () => {
-    setShowCardForm(showCardForm => !showCardForm);
-  };
+  // const toggleCardFormDisplay = () => {
+  //   setShowCardForm(showCardForm => !showCardForm);
+  // };
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const [mood, setMood] = useState('default');
+
+// const handleMoodChange = (selectedMood) => {
+//   setMood(selectedMood);
+// };
+
 
   return (
-    <div className="app-wrapper">
-      <Header />
+    // <div className="app-wrapper">
+    <div className={`app-wrapper ${mood}`}>
+
+      <Header onOpenDrawer={() => setDrawerOpen(true)} />
+      {/* <button className="open-drawer-button" onClick={() => setDrawerOpen(true)}>☰ Menu</button> */}
+      <SideDrawer
+        isOpen={drawerOpen}
+        closeDrawer={() => setDrawerOpen(false)}
+        onPostBoard={postBoard}
+        onPostCard={postCard}
+        onChangeMood={handleMoodChange} // позже добавим эту функцию
+        curBoard={curBoard}
+      />
       <main className="main-layout">
         <section className="board-section">
           <h1>Boards</h1>
-          <BoardList boards={boards} displayBoard={displayBoard}/>
-          <div>
+          <BoardList boards={boards} displayBoard={displayBoard} />
+          {/* <div>
             {
-              !showBoardForm && 
-                <button onClick={toggleBoardFormDisplay}>+ Create a new board</button>  
-            } 
-            {showBoardForm && 
-              <NewBoardForm onPostBoard={postBoard}/>
+              !showBoardForm &&
+              <button onClick={toggleBoardFormDisplay}>+ Create a new board</button>
             }
-          </div>
+            {showBoardForm &&
+              <NewBoardForm onPostBoard={postBoard} />
+            }
+          </div> */}
         </section>
 
         <section className="card-section">
           <h3>{curBoard.title} - {curBoard.owner}</h3>
-          <CardList 
-            cards={cards} 
+          <CardList
+            cards={cards}
             increaseLikeCount={increaseLikeCount}
             deleteCard={deleteCard}
-          />        
-          <div>
+          />
+          {/* <div>
             {
-              !showCardForm && 
-                <button onClick={toggleCardFormDisplay}>+ Create a new Card</button>  
-            } 
-            {showCardForm && 
-              <NewCardForm onPostCard={postCard}/>
+              !showCardForm &&
+              <button onClick={toggleCardFormDisplay}>+ Create a new Card</button>
             }
-          </div>
-        </section>  
+            {showCardForm &&
+              <NewCardForm onPostCard={postCard} />
+            }
+          </div> */}
+        </section>
       </main>
       <Footer />
     </div>
