@@ -10,3 +10,7 @@ export const postBoardApi = async (newBoardData) => {
   const response = await axios.post(`${VITE_APP_BACKEND_URL}/boards`, newBoardData);
   return response.data;
 };
+
+export const deleteBoardApi = async (boardId) => {
+  return await axios.delete(`${VITE_APP_BACKEND_URL}/boards/${boardId}`);
+};

@@ -7,7 +7,7 @@ import BoardList from './components/BoardList';
 import CardList from './components/CardList';
 import NewBoardForm from './components/NewBoardForm';
 import NewCardForm from './components/NewCardForm';
-import { getAllBoardsApi, postBoardApi } from './services/boardApi';
+import { getAllBoardsApi, postBoardApi, deleteBoardApi } from './services/boardApi';
 import { postCardApi, getCardsApi, deleteCardApi, addCardLikesApi } from './services/cardApi';
 
 import Header from './components/Header';
@@ -31,13 +31,11 @@ function App() {
   const [showCardForm, setShowCardForm] = useState(false);
   const [backgroundImg, setBackgroundImg] = useState(kDefaultBackgroundImg);
 
-  console.log(backgroundImg);
   const getAllBoards = async () => {
     //call Api to get all boards
     // use data from backend to set boards
     try {
       const data = await getAllBoardsApi();
-      console.log(data);
       setBoards(data);
     } catch(error){
       console.log('failed to get Boards from server', error);
@@ -141,6 +139,14 @@ function App() {
     setBackgroundImg(`url(${new URL(`./assets/${moodName}.jpg`, import.meta.url).href})`);
   };
 
+  const deleteBoard = async (id) => {
+    try {
+      await deleteBoardApi(id);
+      await getAllBoards();
+    } catch(error) {
+      console.log(error);
+    }    
+  }
   return (
     <div className="app-wrapper" style={{
       backgroundImage:backgroundImg
@@ -149,7 +155,7 @@ function App() {
       <main className="main-layout">
         <section className="board-section">
           <h1>Boards</h1>
-          <BoardList boards={boards} displayBoard={displayBoard}/>
+          <BoardList boards={boards} displayBoard={displayBoard} deleteBoard={deleteBoard}/>
           <div>
             {
               !showBoardForm && 
