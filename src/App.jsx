@@ -163,7 +163,7 @@ function App() {
         closeDrawer={() => setDrawerOpen(false)}
         onPostBoard={postBoard}
         onPostCard={postCard}
-        onChangeMood={handleMoodChange} // позже добавим эту функцию
+        onChangeMood={handleMoodChange} 
         curBoard={curBoard}
       />
       <main className="main-layout">

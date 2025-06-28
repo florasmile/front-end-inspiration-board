@@ -5,7 +5,7 @@ const Board = ({ id, title, displayBoard }) => {
   return (
     <li className="boards__item">
   <button
-    className="board"        // ← добавляем
+    className="board"        
     onClick={() => displayBoard(id)}
   >
     {title}
