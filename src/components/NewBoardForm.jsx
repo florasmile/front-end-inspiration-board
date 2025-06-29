@@ -35,8 +35,14 @@ const NewBoardForm = ( { onPostBoard }) => {
   const handleSubmit = (event) => {
     // once user clicks "submit", we want to send this new form data back to app to call backend to handle it; 
     event.preventDefault();
+      // Validate all fields on submit
+    const newErrors = {
+      title: validateField('title', formData.title),
+      owner: validateField('owner', formData.owner)
+    };
+    setErrors(newErrors);
     //check error, prevent submission if there is error
-    if (!errors.title && errors.owner){
+    if (!errors.title && !errors.owner){
       onPostBoard(formData);
       setFormData(kDefaultFormData);
     }
@@ -54,10 +60,11 @@ const NewBoardForm = ( { onPostBoard }) => {
           onChange={handleChange}
           onBlur={() => setErrors({ ...errors, title: validateField('title', formData.title)})}
           maxLength={41}
+          placeholder="title is required"
           className={errors.title? 'error': ''}
         />
         <div className="form-feedback">
-          {errors.owner ? (
+          {errors.title ? (
             <span className="error">{errors.title}</span>
           ) : (
             <span className="char-count">{formData.title.length}/40</span>
@@ -77,6 +84,7 @@ const NewBoardForm = ( { onPostBoard }) => {
             owner: validateField('owner', formData.owner)
           })}
           maxLength={41}
+          placeholder="owner is required"
           className={errors.owner ? 'error' : ''}
         />
         <div className="form-feedback">
@@ -87,7 +95,7 @@ const NewBoardForm = ( { onPostBoard }) => {
           )}
         </div>
       </div>
-      <button type="submit" disabled={errors.title || errors.owner}>Submit</button>
+      <button type="submit" disabled={!!errors.title || !!errors.owner}>Submit</button>
     </form>
   </section>;
 };

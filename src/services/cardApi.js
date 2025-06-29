@@ -2,6 +2,8 @@ import axios from 'axios';
 import { VITE_APP_BACKEND_URL } from './api';
 
 export const postCardApi = async (newCardData, boardId) => {
+  console.log('newCardData', newCardData);
+  console.log('boardId', boardId);
   const response = await axios.post(`${VITE_APP_BACKEND_URL}/boards/${boardId}/cards`, newCardData);
   return response.data;
 };

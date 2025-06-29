@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import BoardList from './components/BoardList';
 import CardList from './components/CardList';
 import MoodSelector from './components/MoodSelector';
+import SideDrawer from './components/SideDrawer';
 import { getAllBoardsApi, postBoardApi, deleteBoardApi } from './services/boardApi';
 import { postCardApi, getCardsApi, deleteCardApi, addCardLikesApi } from './services/cardApi';
 
@@ -75,8 +76,8 @@ function App() {
     try {
       const data = await addCardLikesApi(id);
       console.log('data from backend', data);
-      fetchCards();
-      console.log(cards);
+      await fetchCards();
+      // console.log(cards);
     } catch (error) {
       console.log(error);
     };
@@ -100,8 +101,7 @@ function App() {
   const postCard = async (newCardData) => {
     // make a call to backend to create a new card
     try {
-      await postCardApi({ ...newCardData, boardId: curBoard.id });
-
+      await postCardApi(newCardData, curBoard.id );
       // setCurBoard(prevBoard => ({...prevBoard}));//getCards from backend to trigger rerender
       fetchCards();
     } catch (error) {
@@ -166,7 +166,7 @@ function App() {
         onPostBoard={postBoard}
         onPostCard={postCard}
         onChangeMood={changeMood} 
-        curBoard={curBoard}
+        // curBoard={curBoard}
       />
       <main className="main-layout">
         <section className="board-section">
@@ -194,7 +194,6 @@ function App() {
         </section>
 
         <section className="card-section">
-          <MoodSelector onMoodChange={changeMood}/>
           <h3>{curBoard.title} - {curBoard.owner}</h3>
           <CardList
             cards={cards}

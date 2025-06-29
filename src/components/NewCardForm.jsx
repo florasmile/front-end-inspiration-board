@@ -25,7 +25,7 @@ const NewCardForm = ({ onPostCard }) => {
     const validationError = validate(message);
     setError(validationError);
     if (!validationError) {
-      onPostCard({message});
+      onPostCard({message: message});
       setMessage('');
     }
   };
@@ -44,7 +44,7 @@ const NewCardForm = ({ onPostCard }) => {
             onChange={handleChange}
             onBlur={() => setError(validate(message))}
             maxLength={41}
-            placeholder="Type your message..."
+            placeholder="message is required"
             className={error ? 'error': ''}
           />        
           <div className="message-feedback">
@@ -55,7 +55,7 @@ const NewCardForm = ({ onPostCard }) => {
             )}
           </div>
       </div>
-      <button type="submit" disabled={!message.trim()}>Submit</button>
+      <button type="submit" disabled={!!error}>Submit</button>
       </form>
     </section>
   );
