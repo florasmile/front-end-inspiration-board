@@ -3,23 +3,18 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import { useState, useEffect } from 'react';
 import './App.css';
-import BoardList from './components/BoardList';
-import CardList from './components/CardList';
-import NewBoardForm from './components/NewBoardForm';
-import NewCardForm from './components/NewCardForm';
+
 import Header from './components/Header';
 import Footer from './components/Footer';
-import SideDrawer from './components/SideDrawer';
-// import BOARDS from './boards.json';
-// import CARDS from './cards.json';
-import { getAllBoardsApi, postBoardApi } from './services/boardApi';
+import BoardList from './components/BoardList';
+import CardList from './components/CardList';
+import MoodSelector from './components/MoodSelector';
+import { getAllBoardsApi, postBoardApi, deleteBoardApi } from './services/boardApi';
 import { postCardApi, getCardsApi, deleteCardApi, addCardLikesApi } from './services/cardApi';
 
-
+const kDefaultBackgroundImg = `url(${new URL('./assets/default.jpg', import.meta.url).href})`;
 const convertCardData = ({ id, likes_count, message }) => {
   const converted = { id, message, likeCount: likes_count };
-
-  console.log('converted data', converted)
   return converted;
 }
 
@@ -32,13 +27,15 @@ function App() {
   const [cards, setCards] = useState([]);
   // const [showBoardForm, setShowBoardForm] = useState(false);
   // const [showCardForm, setShowCardForm] = useState(false);
+  const [backgroundImg, setBackgroundImg] = useState(kDefaultBackgroundImg);
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const getAllBoards = async () => {
     //call Api to get all boards
     // use data from backend to set boards
     try {
       const data = await getAllBoardsApi();
-      console.log(data);
       setBoards(data);
     } catch (error) {
       console.log('failed to get Boards from server', error);
@@ -96,9 +93,9 @@ function App() {
     // toggleBoardFormDisplay();
   };
 
-  const handleMoodChange = (newMood) => {
-  setMood(newMood);
-};
+//   const handleMoodChange = (newMood) => {
+//   setMood(newMood);
+// };
 
   const postCard = async (newCardData) => {
     // make a call to backend to create a new card
@@ -143,19 +140,24 @@ function App() {
   //   setShowCardForm(showCardForm => !showCardForm);
   // };
 
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const changeMood = (moodName) => {
+    setBackgroundImg(`url(${new URL(`./assets/${moodName}.jpg`, import.meta.url).href})`);
+  };
 
-  const [mood, setMood] = useState('default');
-
-// const handleMoodChange = (selectedMood) => {
-//   setMood(selectedMood);
-// };
-
-
+  const deleteBoard = async (id) => {
+    try {
+      await deleteBoardApi(id);
+      await getAllBoards();
+    } catch(error) {
+      console.log(error);
+    }    
+  }
   return (
     // <div className="app-wrapper">
-    <div className={`app-wrapper ${mood}`}>
-
+    // <div className={`app-wrapper ${mood}`}>
+    <div className="app-wrapper" style={{
+      backgroundImage:backgroundImg
+    }}>
       <Header onOpenDrawer={() => setDrawerOpen(true)} />
       {/* <button className="open-drawer-button" onClick={() => setDrawerOpen(true)}>☰ Menu</button> */}
       <SideDrawer
@@ -163,14 +165,24 @@ function App() {
         closeDrawer={() => setDrawerOpen(false)}
         onPostBoard={postBoard}
         onPostCard={postCard}
-        onChangeMood={handleMoodChange} 
+        onChangeMood={changeMood} 
         curBoard={curBoard}
       />
       <main className="main-layout">
         <section className="board-section">
           <h1>Boards</h1>
-          <BoardList boards={boards} displayBoard={displayBoard} />
+          <BoardList boards={boards} displayBoard={displayBoard}
+          deleteBoard={deleteBoard} />
           {/* <div>
+    <div className="app-wrapper" style={{
+      backgroundImage:backgroundImg
+    }}>
+      <Header />      
+      <main className="main-layout">
+        <section className="board-section">
+          <h1>Boards</h1>
+          <BoardList boards={boards} displayBoard={displayBoard} deleteBoard={deleteBoard}/>
+          <div>
             {
               !showBoardForm &&
               <button onClick={toggleBoardFormDisplay}>+ Create a new board</button>
@@ -182,6 +194,7 @@ function App() {
         </section>
 
         <section className="card-section">
+          <MoodSelector onMoodChange={changeMood}/>
           <h3>{curBoard.title} - {curBoard.owner}</h3>
           <CardList
             cards={cards}

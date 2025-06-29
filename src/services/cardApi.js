@@ -12,7 +12,7 @@ export const getCardsApi = async (boardId) => {
 };
 
 export const deleteCardApi = async (cardId) => {
-  await axios.delete(`${VITE_APP_BACKEND_URL}/cards/${cardId}`);
+  return await axios.delete(`${VITE_APP_BACKEND_URL}/cards/${cardId}`);
 };
 
 export const addCardLikesApi = async (cardId) => {
