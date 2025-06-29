@@ -139,8 +139,9 @@ function App() {
   // const toggleCardFormDisplay = () => {
   //   setShowCardForm(showCardForm => !showCardForm);
   // };
-
+  
   const changeMood = (moodName) => {
+    console.log(moodName);
     setBackgroundImg(`url(${new URL(`./assets/${moodName}.jpg`, import.meta.url).href})`);
   };
 

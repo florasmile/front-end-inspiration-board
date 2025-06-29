@@ -68,10 +68,10 @@ html {
   height: calc(100vh - 100px);
   overflow: hidden;
 
-  background-image: url('./assets/default.jpg');
-  background-size: cover;
+  /* background-image: url('./assets/default.jpg'); */
+  /* background-size: cover;
   background-repeat: no-repeat;
-  background-position: top left;
+  background-position: top left; */
 
 }
 
