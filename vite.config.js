@@ -5,4 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/front-end-inspiration-board/', // Add this line (match your repo name)
+  server: {
+    allowedHosts: ['front-end-inspiration-board-r4rm.onrender.com'],
+  },
 })

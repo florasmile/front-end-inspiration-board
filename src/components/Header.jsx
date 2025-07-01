@@ -1,4 +1,4 @@
-import './Header.css'; // Убедись, что стили подключены
+import './Header.css';
 
 const Header = ({ onOpenDrawer }) => {
   return (
