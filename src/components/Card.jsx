@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import './card.css';
+import './Card.css';
 
 const Card = ({ id, message, likeCount, increaseLikeCount, deleteCard}) => {
 
