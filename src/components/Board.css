@@ -1,0 +1,49 @@
+.board-wrapper {
+  position: relative;
+  list-style: none;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+button.board {
+  all: unset;
+  display: inline-block;
+  padding: 0.4rem 1.2rem;
+  background-color: rgb(101, 101, 100);
+  color: rgba(255, 255, 100);
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.2;
+  border-radius: 9999px;              
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+  width: 100%;                       
+  max-width: 300px; 
+}
+
+button.board:hover {
+  background-color: rgba(255, 255, 100);
+  color: rgb(101, 101, 100);
+}
+
+button.delete-button {
+  all: unset;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  color: rgb(101, 101, 100);
+  cursor: pointer;
+  line-height: 1; 
+}
+
+button.delete-button:hover {
+  color: rgb(236, 12, 12);
+}
+
+

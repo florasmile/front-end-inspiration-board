@@ -1,28 +1,31 @@
-.cardContainer {
+.card-box {
   width: 200px;
   min-height: 150px;
   padding: 0.75rem;
   margin: 0.5rem;
-
-  background-color: rgba(227, 213, 84, 0.467);
-  color: #222;
+  background-color: rgba(255, 255, 100, 0.634);
+  color: rgb(24, 24, 24);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   font-size: 0.95rem;
   border-radius: 10px;
-
   backdrop-filter: blur(2px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-
-  transition: all 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.cardContainer:hover {
-  background-color: rgba(229, 241, 7, 0.784);
-  transform: scale(1.01);
+.card-box:hover {
+  background-color: rgb(255, 255, 100);
+  color: rgb(101, 101, 100);
+  transform: scale(1.02);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
-.likeButton,
-.deleteButton {
+.like-button,
+.delete-button {
   background: transparent;
   border: none;
   padding: 0;
@@ -34,15 +37,24 @@
   transition: transform 0.2s ease;
 }
 
-.likeButton:hover,
-.deleteButton:hover {
+.like-button:hover,
+.delete-button {
   transform: scale(1.1);
 }
 
-.likeCount {
+.like-count {
   margin-right: 0.5rem;
 }
 
-.likeButton {
+.like-button {
   margin-right: 2rem;
+}
+
+/* DOESN'T WORK! */
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.5rem;
+  gap: 0.5rem;
 }

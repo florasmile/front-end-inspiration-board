@@ -12,9 +12,9 @@ const NewBoardForm = ( { onPostBoard }) => {
   const [errors, setErrors] = useState(kDefaultFormData);
 
   const validateField = (name, value) => {
-    if (!value.trim()) {
-      return 'This field is required';
-    }
+    // if (!value.trim()) {
+    //   return 'This field is required';
+    // }
     if (value.length > 40) {
       return 'Maximum 40 characters allowed';
     }
@@ -50,7 +50,7 @@ const NewBoardForm = ( { onPostBoard }) => {
   return <section>
     <h2>Create a new board</h2>
     <form onSubmit={handleSubmit} className="board-form"> 
-      <div>
+      <div className="form-row">
         <label htmlFor="board-title">Title</label>
         <input
           id="board-title"
@@ -71,7 +71,7 @@ const NewBoardForm = ( { onPostBoard }) => {
           )}
         </div>
       </div>
-      <div>
+      <div className="form-row">
         <label htmlFor="board-owner">Owner</label>
         <input
           id="board-owner"

@@ -1,4 +1,3 @@
-/* --- Menu --- */
 .open-drawer-button {
   position: absolute;
   top: 1rem;
@@ -10,14 +9,13 @@
   font-family: 'Rock Salt', cursive;
 }
 
-/* --- ПАНЕЛЬ --- */
 .side-drawer {
   position: fixed;
   top: 0;
   right: -100%;
-  width: 300px;
+  width: 600px;
   height: 100%;
-  background-color: rgba(159, 159, 158, 0.577);
+  background-color: rgba(159, 159, 158, 0.597);
   transition: right 0.3s ease-in-out;
   z-index: 1000;
   overflow-y: auto;
@@ -26,37 +24,38 @@
   flex-direction: column;
   font-family: 'Rock Salt', cursive;
   font-size: 0.9rem;
-  background-image: url('../assets/neutral.jpg');
+  background-image: url('src/assets/neutral.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  border: none;
+  border-left: 3px solid rgba(255, 255, 100);
 }
 
 .side-drawer.open {
   right: 0;
 }
 
-/* --- ЗАКРЫВАЮЩИЙ КРЕСТИК --- */
 .close-button {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 0.8rem;
   color: #ec2107;
   position: absolute;
-  top: 1rem;
+  top: 0.5rem;
   right: 1rem;
   cursor: pointer;
   z-index: 1001;
 }
 
-/* --- ЗАГОЛОВКИ ФОРМ --- */
 .side-drawer h2 {
   font-size: 1.1rem;
   margin: 1.2rem 0 0.5rem;
   text-align: center;
+  color: rgb(255, 255, 100);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
 }
 
-/* --- РАЗДЕЛИТЕЛИ (только 2) --- */
 .side-drawer section:nth-of-type(2),
 .side-drawer section:nth-of-type(3) {
   border-top: double 3px #fff;
@@ -64,7 +63,6 @@
   margin-top: 0.8rem;
 }
 
-/* --- ЭЛЕМЕНТЫ ФОРМ --- */
 .side-drawer label {
   display: block;
   margin-top: 0.5rem;
@@ -83,12 +81,11 @@
   border: 1px solid #ccc;
 }
 
-/* --- КНОПКА SUBMIT --- */
 .side-drawer button[type="submit"] {
-  background-color: #ffff66;
-  color: #000;
+  background-color: #69ff66;
+  color: #494a49;
   font-weight: bold;
-  border: 2px solid #333;
+  border: 2px solid rgb(101, 101, 100);
   padding: 0.3rem 0.8rem;
   border-radius: 1.5rem;
   font-family: 'Rock Salt', cursive;
@@ -99,7 +96,6 @@
   display: block;
 }
 
-/* --- ОБЩЕЕ ОФОРМЛЕНИЕ СЕКЦИЙ --- */
 .side-drawer section {
   flex: 0 0 auto;
   display: flex;
@@ -127,7 +123,7 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: yellow;
+  color: rgb(255, 255, 100);
   padding: 0.2rem;
   transition: transform 0.2s;
 }

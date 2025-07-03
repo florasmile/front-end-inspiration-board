@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
+import './Board.css';
 
 const Board = ({ id, title, displayBoard, deleteBoard }) => {
 
   return (
-    <li className="boards__item">
-      <button
-        className="board"        // ← добавляем
-        onClick={() => displayBoard(id)}
-      >
+    <li className="board-wrapper">
+      <button className="board" onClick={() => displayBoard(id)}>
         {title}
       </button>
-      <button onClick={() => deleteBoard(id)}>❌</button>
+      <button className="delete-button" onClick={() => deleteBoard(id)}>
+        ❌
+      </button>
     </li>
   );
 };

@@ -1,0 +1,20 @@
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-row label {
+  width: 100px;
+  font-weight: bold;
+  color: rgba(255, 255, 100);
+}
+
+.form-row input,
+.form-row select {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid rgb(101, 101, 100);
+}
