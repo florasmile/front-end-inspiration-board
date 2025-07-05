@@ -73,7 +73,11 @@ function App() {
     try {
       const data = await addCardLikesApi(id);
       console.log('data from backend', data);
-      await fetchCards();
+      setCards(prevCards =>
+        prevCards.map(card =>
+          card.id === id ? { ...card, likeCount: card.likeCount + 1 } : card
+        )
+    );
       // console.log(cards);
     } catch (error) {
       console.log(error);
