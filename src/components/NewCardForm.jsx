@@ -6,14 +6,14 @@ const NewCardForm = ({ onPostCard }) => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const handleChange = (event) => {
-    setMessage(event.target.value);    
+    setMessage(event.target.value);
     setError(validate(event.target.value));
   };
-  
+
   const validate = (value) => {
-    if (!value.trim()) {
-      return 'This field is required';
-    }
+    // if (!value.trim()) {
+    //   return 'This field is required';
+    // }
     if (value.length > 40) {
       return 'Maximum 40 characters allowed';
     }
@@ -25,7 +25,7 @@ const NewCardForm = ({ onPostCard }) => {
     const validationError = validate(message);
     setError(validationError);
     if (!validationError) {
-      onPostCard({message: message});
+      onPostCard({ message: message });
       setMessage('');
     }
   };
@@ -34,7 +34,7 @@ const NewCardForm = ({ onPostCard }) => {
     <section>
       <h2>Create a new card</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-row">
           <label htmlFor="card-message">Message</label>
           <input
             id="card-message"
@@ -45,17 +45,18 @@ const NewCardForm = ({ onPostCard }) => {
             onBlur={() => setError(validate(message))}
             maxLength={41}
             placeholder="message is required"
-            className={error ? 'error': ''}
-          />        
-          <div className="message-feedback">
-            {error ? (
-              <span className="error">{error}</span>
-              ) : (
-              <span className="char-count">{message.length}/40</span>
-            )}
-          </div>
-      </div>
-      <button type="submit" disabled={!!error}>Submit</button>
+            className={error ? 'error' : ''}
+          />
+        </div>
+        <div className="message-feedback">
+          {error ? (
+            <span className="error">{error}</span>
+          ) : (
+            <span className="char-count">{message.length}/40</span>
+          )}
+        </div>
+
+        <button type="submit" disabled={!!error}>Submit</button>
       </form>
     </section>
   );

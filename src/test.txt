@@ -1,0 +1,38 @@
+.cardContainer {
+  width: 200px;
+  min-height: 150px;
+  padding: 0.75rem;
+  margin: 0.5rem;
+
+  background-color: rgba(227, 213, 84, 0.467);
+  color: #222;
+  font-size: 0.95rem;
+  border-radius: 10px;
+
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+
+  /* 🎯 Новая часть: добавлена реалистичная тень */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+card-section {
+  flex: 1 1 73%;
+  max-width: 73%;
+  min-width: 300px;
+
+  height: calc(100% - 1rem); /* чуть меньше, чтобы не конфликтовало со sticky */
+  overflow-y: auto;
+
+  background-image: url('/board.jpeg');
+  background-repeat: repeat;          /* повторять фон */
+  background-size: auto;              /* не растягивать */
+  background-position: center;
+  opacity: 0.7;
+
+  color: rgba(255, 255, 100);
+  border-radius: 15px;
+  padding: 1rem;
+  box-sizing: border-box;
+  /* overflow: hidden; */
+}

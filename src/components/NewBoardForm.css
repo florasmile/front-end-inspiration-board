@@ -1,9 +1,11 @@
 label {
-  margin-right: 0.5em; /* add Horizontal space */
+  margin-right: 0.5em;
+  /* add Horizontal space */
 }
 
 input.error {
-  outline: 2px solid #ff4444;  /* Red outline */
+  outline: 2px solid #ff4444;
+  /* Red outline */
   /* border-color: #ff4444; */
 }
 
@@ -13,4 +15,31 @@ input.error {
 
 .char-count {
   color: #666;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-row label {
+  width: 100px;
+  font-weight: bold;
+  color: rgba(255, 255, 100);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
+
+.form-row input,
+.form-row select {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid rgb(101, 101, 100);
+}
+
+.form-row input:focus,
+.form-row select:focus {
+  outline: 2px solid rgba(255, 255, 100);
 }

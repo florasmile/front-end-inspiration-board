@@ -1,6 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
-
 import { useState, useEffect } from 'react';
 import './App.css';
 
@@ -13,7 +10,7 @@ import SideDrawer from './components/SideDrawer';
 import { getAllBoardsApi, postBoardApi, deleteBoardApi } from './services/boardApi';
 import { postCardApi, getCardsApi, deleteCardApi, addCardLikesApi } from './services/cardApi';
 
-const kDefaultBackgroundImg = `url(${new URL('./assets/default.jpg', import.meta.url).href})`;
+const kDefaultBackgroundImg = `url(${new URL('./assets/cork.jpg', import.meta.url).href})`;
 const convertCardData = ({ id, likes_count, message }) => {
   const converted = { id, message, likeCount: likes_count };
   return converted;
@@ -76,7 +73,11 @@ function App() {
     try {
       const data = await addCardLikesApi(id);
       console.log('data from backend', data);
-      await fetchCards();
+      setCards(prevCards =>
+        prevCards.map(card =>
+          card.id === id ? { ...card, likeCount: card.likeCount + 1 } : card
+        )
+    );
       // console.log(cards);
     } catch (error) {
       console.log(error);
@@ -94,14 +95,14 @@ function App() {
     // toggleBoardFormDisplay();
   };
 
-//   const handleMoodChange = (newMood) => {
-//   setMood(newMood);
-// };
+  //   const handleMoodChange = (newMood) => {
+  //   setMood(newMood);
+  // };
 
   const postCard = async (newCardData) => {
     // make a call to backend to create a new card
     try {
-      await postCardApi(newCardData, curBoard.id );
+      await postCardApi(newCardData, curBoard.id);
       // setCurBoard(prevBoard => ({...prevBoard}));//getCards from backend to trigger rerender
       fetchCards();
     } catch (error) {
@@ -139,7 +140,7 @@ function App() {
   // const toggleCardFormDisplay = () => {
   //   setShowCardForm(showCardForm => !showCardForm);
   // };
-  
+
   const changeMood = (moodName) => {
     console.log(moodName);
     setBackgroundImg(`url(${new URL(`./assets/${moodName}.jpg`, import.meta.url).href})`);
@@ -149,15 +150,16 @@ function App() {
     try {
       await deleteBoardApi(id);
       await getAllBoards();
-    } catch(error) {
+    } catch (error) {
       console.log(error);
-    }    
+    }
   }
+
   return (
     // <div className="app-wrapper">
     // <div className={`app-wrapper ${mood}`}>
     <div className="app-wrapper" style={{
-      backgroundImage:backgroundImg
+      backgroundImage: backgroundImg,
     }}>
       <Header onOpenDrawer={() => setDrawerOpen(true)} />
       {/* <button className="open-drawer-button" onClick={() => setDrawerOpen(true)}>☰ Menu</button> */}
@@ -166,50 +168,32 @@ function App() {
         closeDrawer={() => setDrawerOpen(false)}
         onPostBoard={postBoard}
         onPostCard={postCard}
-        onChangeMood={changeMood} 
-        // curBoard={curBoard}
+        onChangeMood={changeMood}
+      // curBoard={curBoard}
       />
       <main className="main-layout">
         <section className="board-section">
-          <h1>Boards</h1>
-          <BoardList boards={boards} displayBoard={displayBoard}
-          deleteBoard={deleteBoard} />
-          {/* <div>
-    <div className="app-wrapper" style={{
-      backgroundImage:backgroundImg
-    }}>
-      <Header />      
-      <main className="main-layout">
-        <section className="board-section">
-          <h1>Boards</h1>
-          <BoardList boards={boards} displayBoard={displayBoard} deleteBoard={deleteBoard}/>
-          <div>
-            {
-              !showBoardForm &&
-              <button onClick={toggleBoardFormDisplay}>+ Create a new board</button>
-            }
-            {showBoardForm &&
-              <NewBoardForm onPostBoard={postBoard} />
-            }
-          </div> */}
+          <h1 className="board-title">Boards</h1>
+          <div className="board-container">   {/* ← контейнер со скроллом */}
+            <BoardList
+              boards={boards}
+              displayBoard={displayBoard}
+              deleteBoard={deleteBoard}
+            />
+          </div>
         </section>
 
         <section className="card-section">
-          <h3>{curBoard.title} - {curBoard.owner}</h3>
-          <CardList
-            cards={cards}
-            increaseLikeCount={increaseLikeCount}
-            deleteCard={deleteCard}
-          />
-          {/* <div>
-            {
-              !showCardForm &&
-              <button onClick={toggleCardFormDisplay}>+ Create a new Card</button>
-            }
-            {showCardForm &&
-              <NewCardForm onPostCard={postCard} />
-            }
-          </div> */}
+          <div className="card-section-header">
+            <h3 className="card-title">{curBoard.title} by {curBoard.owner}</h3>
+          </div>
+          <div className="card-container">
+            <CardList
+              cards={cards}
+              increaseLikeCount={increaseLikeCount}
+              deleteCard={deleteCard}
+            />
+          </div>
         </section>
       </main>
       <Footer />

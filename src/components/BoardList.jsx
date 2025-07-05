@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import Board from './Board.jsx';
+import './BoardList.css';
 
 const BoardList = ({ boards, displayBoard, deleteBoard }) => {
   const getBoardListJSX = (boards) => {
     return boards.map((board) => {
       return (
-        <Board 
+        <Board
           key={board.id}
           id={board.id}
           title={board.title}
@@ -16,9 +17,11 @@ const BoardList = ({ boards, displayBoard, deleteBoard }) => {
       );
     })
   };
-  return <ul className="list-unstyled">
-    { getBoardListJSX(boards)}
-  </ul>
+  return (
+    <ul className="board-list">
+      {getBoardListJSX(boards)}
+    </ul>
+  );
 };
 
 BoardList.propTypes = {

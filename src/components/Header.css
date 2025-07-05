@@ -1,24 +1,56 @@
-header {
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.5cm;
+  background-image: url('/letters.jpg');
+  background-size: cover;
+  background-position: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+  color: rgb(255, 255, 100);
+  padding: 0 4rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  border-bottom: 2px solid #f9f6f6;
+  box-sizing: border-box;
+  z-index: 1000;
+  border: none;
+  border-bottom: 3px solid rgba(255, 255, 100);
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #777;
-  padding: 0.5rem 2rem;
 }
 
-header h1 {
-  margin: 0;
+.site-header h1 {
   font-size: 3rem;
-  color: #ffff66;
-  font-family: 'Rock Salt', cursive;
+  margin: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  position: relative;   
+  z-index: 1; 
 }
 
-/* Перемещаем кнопку внутрь header и вправо */
 .open-drawer-button {
   background: transparent;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
   font-family: 'Rock Salt', cursive;
-  color: black;
+  color: rgba(255, 255, 100, 1);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
+
+.site-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(142, 139, 139, 0.631);
+  z-index: 0;
 }

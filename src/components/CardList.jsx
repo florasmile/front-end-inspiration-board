@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import Card from './Card';
+import './CardList.css';
 
 const CardList = ({ cards, increaseLikeCount, deleteCard }) => {
   const getCardListJSX = (cards) => {
@@ -17,9 +18,11 @@ const CardList = ({ cards, increaseLikeCount, deleteCard }) => {
     })
   };
 
-  return <ul className="d-flex flex-wrap gap-3 list-unstyled">
-    { getCardListJSX (cards)}
-  </ul>
+  return (
+    <div className="card-list">
+      {getCardListJSX(cards)}
+    </div>
+  );
 };
 
 CardList.propTypes = {
@@ -30,7 +33,8 @@ CardList.propTypes = {
       likeCount: PropTypes.number.isRequired,
     })
   ).isRequired,
-  increaseLikeCount:PropTypes.func.isRequired,
-  deleteCard:PropTypes.func.isRequired,
+  increaseLikeCount: PropTypes.func.isRequired,
+  deleteCard: PropTypes.func.isRequired,
 };
+
 export default CardList;
