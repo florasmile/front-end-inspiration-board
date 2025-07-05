@@ -3,10 +3,10 @@
   min-height: 150px;
   padding: 0.75rem;
   margin: 0.5rem;
-  background-color: rgba(255, 255, 100, 0.634);
-  color: rgb(24, 24, 24);
+  background-color: rgba(218, 216, 215, 0.741);
+  color: rgb(250, 3, 56);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  font-size: 0.95rem;
+  font-size: 1rem;
   border-radius: 10px;
   backdrop-filter: blur(2px);
   border: 1px solid rgba(0, 0, 0, 0.2);

@@ -25,21 +25,21 @@
 }
 
 .card-section {
-  flex: 1 1 73%;
-  max-width: 73%;
-  min-width: 300px;
-  height: calc(100vh - 2.5cm - 1.5cm - 3cm);
-  display: flex;
-  flex-direction: column;
-  background-image: url('src/assets/default.jpg');
+  width: 100%;
+  max-width: 1200px;                   
+  aspect-ratio: 3 / 2;                 
+  
+  background-image: url('src/assets/surprise.jpg');
+  background-size: cover;              
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top center;
-  color: rgba(255, 255, 100);
-  overflow: auto;
-  border: 3px solid rgba(255, 255, 100); 
+  background-position: center center;
+
+  border: 3px solid rgba(255, 255, 100);
   border-radius: 15px;
   box-sizing: border-box;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
 }
 
 .card-section-header {
