@@ -21,4 +21,8 @@ export const addCardLikesApi = async (cardId) => {
   console.log('cardId passed', cardId);
   const response = await axios.patch(`${VITE_APP_BACKEND_URL}/cards/${cardId}/like`);
   return response.data;
-}
+};
+
+export const updateCardApi = async (cardId, newMessage) => {
+  return axios.put(`${VITE_APP_BACKEND_URL}/cards/${cardId}`,{ message: newMessage });
+};

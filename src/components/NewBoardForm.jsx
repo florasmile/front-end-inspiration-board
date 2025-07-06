@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './NewBoardForm.css';
 
@@ -7,11 +7,20 @@ const kDefaultFormData = {
   owner: '',
 };
 
-const NewBoardForm = ({ onPostBoard }) => {
+const NewBoardForm = ({ onPostBoard, isOpen }) => {
   const [formData, setFormData] = useState(kDefaultFormData);
   const [errors, setErrors] = useState(kDefaultFormData);
-  const [touched,  setTouched]    = useState({ title: false, owner: false });
+  const [touched, setTouched] = useState({ title: false, owner: false });
   const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setFormData(kDefaultFormData);
+      setErrors(kDefaultFormData);
+      setTouched({ title: false, owner: false });
+      setHasSubmitted(false);
+    }
+  }, [isOpen]);
 
   const validateField = (name, value) => {
     if (!value.trim()) {
@@ -62,16 +71,17 @@ const NewBoardForm = ({ onPostBoard }) => {
     setFormData(kDefaultFormData);
     setErrors(kDefaultFormData);
     setTouched({ title: false, owner: false });
-    setHasSubmitted(false); 
+    setHasSubmitted(false);
   };
 
   //do not let create new board without title or owner. All field requarement
   const isSubmitDisabled =
-    !touched.title || !touched.owner ||
-    !formData.title.trim() ||
-    !formData.owner.trim() ||
-    errors.title ||
-    errors.owner;
+    hasSubmitted && (
+      !formData.title.trim() ||
+      !formData.owner.trim() ||
+      errors.title ||
+      errors.owner
+    );
 
   return <section>
     <h2>Create a new board</h2>
@@ -87,14 +97,14 @@ const NewBoardForm = ({ onPostBoard }) => {
           onBlur={handleBlur}
           maxLength={41}
           placeholder="title is required"
-          className={((hasSubmitted || touched.title) && errors.title ) ? 'error' : ''}
+          className={((hasSubmitted || touched.title) && errors.title) ? 'error' : ''}
         />
         <div className="form-feedback">
           {errors.title
-              ? <span className="error">{errors.title}</span>
-              : <span className="char-count">{formData.title.length}/40</span>}
-          </div>
+            ? <span className="error">{errors.title}</span>
+            : <span className="char-count">{formData.title.length}/40</span>}
         </div>
+      </div>
       <div className="form-row">
         <label htmlFor="board-owner">Owner</label>
         <input
@@ -106,13 +116,13 @@ const NewBoardForm = ({ onPostBoard }) => {
           onBlur={handleBlur}
           maxLength={41}
           placeholder="owner is required"
-          className={((hasSubmitted || touched.owner) && errors.owner ) ? 'error' : ''}
+          className={((hasSubmitted || touched.owner) && errors.owner) ? 'error' : ''}
         />
         <div className="form-feedback">
           {errors.owner
-              ? <span className="error">{errors.owner}</span>
-              : <span className="char-count">{formData.owner.length}/40</span>}
-          </div>
+            ? <span className="error">{errors.owner}</span>
+            : <span className="char-count">{formData.owner.length}/40</span>}
+        </div>
       </div>
       <button type="submit" disabled={isSubmitDisabled}>Submit</button>
     </form>
@@ -121,5 +131,6 @@ const NewBoardForm = ({ onPostBoard }) => {
 
 NewBoardForm.propTypes = {
   onPostBoard: PropTypes.func.isRequired,
+  isOpen:      PropTypes.bool.isRequired,
 };
 export default NewBoardForm;

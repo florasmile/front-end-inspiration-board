@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import './Board.css';
 
-const Board = ({ id, title, owner, displayBoard, deleteBoard }) => {
+const Board = ({ id, title, displayBoard, deleteBoard }) => {
 
   return (
     <li className="board-wrapper">
       <button className="board" onClick={() => displayBoard(id)}>
         {title}
-        {owner}
       </button>
       <button className="delete-button" onClick={() => deleteBoard(id)}>
         ❌
@@ -19,7 +18,6 @@ const Board = ({ id, title, owner, displayBoard, deleteBoard }) => {
 Board.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  owner: PropTypes.string.isRequired,
   displayBoard: PropTypes.func.isRequired,
   deleteBoard: PropTypes.func.isRequired
 };

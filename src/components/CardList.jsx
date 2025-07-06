@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Card from './Card';
 import './CardList.css';
 
-const CardList = ({ cards, increaseLikeCount, deleteCard }) => {
+const CardList = ({ cards, increaseLikeCount, deleteCard, updateCardMessage }) => {
   const getCardListJSX = (cards) => {
     return cards.map((card) => {
       return (
@@ -13,6 +13,7 @@ const CardList = ({ cards, increaseLikeCount, deleteCard }) => {
           likeCount={card.likeCount}
           increaseLikeCount={increaseLikeCount}
           deleteCard={deleteCard}
+          updateCardMessage={updateCardMessage}
         />
       );
     })

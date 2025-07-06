@@ -8,9 +8,10 @@ import CardList from './components/CardList';
 import MoodSelector from './components/MoodSelector';
 import SideDrawer from './components/SideDrawer';
 import { getAllBoardsApi, postBoardApi, deleteBoardApi } from './services/boardApi';
-import { postCardApi, getCardsApi, deleteCardApi, addCardLikesApi } from './services/cardApi';
+import { postCardApi, getCardsApi, deleteCardApi, addCardLikesApi,updateCardApi} from './services/cardApi';
 
 const kDefaultBackgroundImg = `url(${new URL('./assets/cork.jpg', import.meta.url).href})`;
+
 const convertCardData = ({ id, likes_count, message }) => {
   const converted = { id, message, likeCount: likes_count };
   return converted;
@@ -82,6 +83,19 @@ function App() {
     } catch (error) {
       console.log(error);
     };
+  };
+
+  const updateCardMessage = async (id, newMessage) => {
+    try {
+      await updateCardApi(id, newMessage);
+      setCards(prevCards =>
+        prevCards.map(card =>
+          card.id === id ? { ...card, message: newMessage } : card
+        )
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const postBoard = async (newBoardData) => {
@@ -192,6 +206,7 @@ function App() {
               cards={cards}
               increaseLikeCount={increaseLikeCount}
               deleteCard={deleteCard}
+              updateCardMessage={updateCardMessage}
             />
           </div>
         </section>
