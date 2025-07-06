@@ -3,11 +3,12 @@ label {
   /* add Horizontal space */
 }
 
-input.error {
+/*input.error {
   outline: 2px solid #ff4444;
   /* Red outline */
-  /* border-color: #ff4444; */
+  /* border-color: #ff4444; 
 }
+*/
 
 .error {
   color: #ff4444;
@@ -43,3 +44,12 @@ input.error {
 .form-row select:focus {
   outline: 2px solid rgba(255, 255, 100);
 }
+
+.form-row input.error,
+.form-row input.error:focus {
+  border: 2px solid #d9534f !important;
+  outline: 2px solid #d9534f !important;
+  box-shadow: 0 0 4px rgba(217, 83, 79, 0.6);
+}
+
+

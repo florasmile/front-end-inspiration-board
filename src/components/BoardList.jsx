@@ -10,7 +10,7 @@ const BoardList = ({ boards, displayBoard, deleteBoard }) => {
           key={board.id}
           id={board.id}
           title={board.title}
-          // owner={board.owner}
+          owner={board.owner}
           displayBoard={displayBoard}
           deleteBoard={deleteBoard}
         />
@@ -29,7 +29,7 @@ BoardList.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-      // owner: PropTypes.string.isRequired,
+      owner: PropTypes.string.isRequired,
     })
   ).isRequired,
   displayBoard: PropTypes.func.isRequired,
