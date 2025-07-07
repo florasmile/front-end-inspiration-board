@@ -24,7 +24,7 @@ const SideDrawer = ({ onPostBoard, onPostCard, onChangeMood, isOpen, closeDrawer
         <aside className={`side-drawer ${isOpen ? 'open' : ''}`}>
             <button className="close-button" onClick={closeDrawer}>❌</button>
             {/* Board section */}
-        <div>
+        <div className="new-board-section">
             {
             !showBoardForm && 
             <button onClick={toggleBoardFormDisplay}>+ new board</button>  
@@ -33,7 +33,7 @@ const SideDrawer = ({ onPostBoard, onPostCard, onChangeMood, isOpen, closeDrawer
             <NewBoardForm onPostBoard={onPostBoard} isOpen={isOpen} toggleNewBoardForm={toggleBoardFormDisplay}/>
             }
         </div>
-        <div>
+        <div className="new-card-section">
             {
             !showCardForm && 
                 <button onClick={toggleCardFormDisplay}>+ new Card</button>  

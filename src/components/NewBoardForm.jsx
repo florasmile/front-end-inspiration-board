@@ -89,7 +89,7 @@ const NewBoardForm = ({ onPostBoard, isOpen, toggleNewBoardForm }) => {
     <span> 
       <button onClick={toggleNewBoardForm}>Hide form</button>
     </span>
-    <form onSubmit={handleSubmit} className="board-form">
+    <form onSubmit={handleSubmit}>
       <div className="form-row">
         <label htmlFor="board-title">Title</label>
         <input

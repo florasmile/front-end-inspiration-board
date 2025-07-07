@@ -3,13 +3,6 @@ label {
   /* add Horizontal space */
 }
 
-/*input.error {
-  outline: 2px solid #ff4444;
-  /* Red outline */
-  /* border-color: #ff4444; 
-}
-*/
-
 .error {
   color: #ff4444;
 }
