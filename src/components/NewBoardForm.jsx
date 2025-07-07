@@ -29,9 +29,9 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
     if (value.length > 40) {
       return '⚠️ 40 max';
     }
-    if (/[^a-zA-Z0-9 ]/.test(value)) {
-      return '⚠️ No special chars';
-    }
+    // if (/[^a-zA-Z0-9 ]/.test(value)) {
+    //   return '⚠️ No special chars';
+    // }
     return '';
   };
 
@@ -83,6 +83,10 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
       errors.owner
     );
 
+  const handleReset = () => {
+    setFormData(kDefaultFormData);
+  };
+
   return <section>
     <h2>Create a new board</h2>
     <form onSubmit={handleSubmit} className="board-form">
@@ -124,7 +128,10 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
             : <span className="char-count">{formData.owner.length}/40</span>}
         </div>
       </div>
-      <button type="submit" disabled={isSubmitDisabled}>Submit</button>
+      <div className="icon-buttons">
+        <button disabled={isSubmitDisabled}>Submit</button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
     </form>
   </section>;
 };

@@ -30,6 +30,10 @@ const NewCardForm = ({ onPostCard }) => {
     }
   };
 
+  const handleReset = () => {
+    setMessage('');
+  }
+
   return (
     <section>
       <h2>Create a new card</h2>
@@ -55,8 +59,10 @@ const NewCardForm = ({ onPostCard }) => {
             <span className="char-count">{message.length}/40</span>
           )}
         </div>
-
-        <button type="submit" disabled={!!error}>Submit</button>
+        <div className="icon-buttons">
+          <button disabled={!!error}>Submit</button>
+          <button onClick={handleReset}>Reset</button>
+        </div>
       </form>
     </section>
   );

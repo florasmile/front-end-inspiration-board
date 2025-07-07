@@ -182,48 +182,48 @@ function App() {
   return (
     // <div className="app-wrapper">
     // <div className={`app-wrapper ${mood}`}>
-    <div className="app-wrapper" style={{
-      backgroundImage: backgroundImg,
-    }}>
-      <Header onOpenDrawer={() => setDrawerOpen(true)} />
-      {/* <button className="open-drawer-button" onClick={() => setDrawerOpen(true)}>☰ Menu</button> */}
-      <SideDrawer
-        isOpen={drawerOpen}
-        closeDrawer={() => setDrawerOpen(false)}
-        onPostBoard={postBoard}
-        onPostCard={postCard}
-        onChangeMood={changeMood}
-      // curBoard={curBoard}
-      />
-      <main className="main-layout">
-        <section className="board-section">
-          <h1 className="board-title">Boards</h1>
-          <div className="board-container">   {/* ← контейнер со скроллом */}
+    <>
+      <div className="app-wrapper" >
+        <Header onOpenDrawer={() => setDrawerOpen(true)} />
+        {/* <button className="open-drawer-button" onClick={() => setDrawerOpen(true)}>☰ Menu</button> */}
+        <SideDrawer
+          isOpen={drawerOpen}
+          closeDrawer={() => setDrawerOpen(false)}
+          onPostBoard={postBoard}
+          onPostCard={postCard}
+          onChangeMood={changeMood}
+        // curBoard={curBoard}
+        />
+        <main className="main-layout">
+          <section className="board-section">
+            <h1 className="board-title">Boards</h1>
             <BoardList
               boards={boards}
               displayBoard={displayBoard}
               deleteBoard={deleteBoard}
               updateBoardTitle={updateBoardTitle}
             />
-          </div>
-        </section>
-
-        <section className="card-section">
-          <div className="card-section-header">
-            <h3 className="card-title">{curBoard.title} by {curBoard.owner}</h3>
-          </div>
-          <div className="card-container">
+          </section>
+          <section
+            className="card-section"
+            style={{
+              backgroundImage: backgroundImg,
+            }}
+          >
+            <div className="card-section-header">
+              <h3 className="card-title">{curBoard.title} by {curBoard.owner}</h3>
+            </div>
             <CardList
               cards={cards}
               increaseLikeCount={increaseLikeCount}
               deleteCard={deleteCard}
               updateCardMessage={updateCardMessage}
             />
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+          </section>
+        </main>
+        <Footer />
+      </div>
+    </>
   )
 }
 
