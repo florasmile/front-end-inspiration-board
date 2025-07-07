@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './NewCardForm.css';
 
-const NewCardForm = ({ onPostCard, isOpen}) => {
+const NewCardForm = ({ onPostCard, isOpen, toggleNewCardForm}) => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const handleChange = (event) => {
@@ -43,7 +43,11 @@ const NewCardForm = ({ onPostCard, isOpen}) => {
 
   return (
     <section>
-      <h2>Create a new card</h2>
+      <h2>Create new card</h2>
+      <span>
+        <button onClick={toggleNewCardForm}>Hide form</button>
+      </span>
+ 
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <label htmlFor="card-message">Message</label>
@@ -78,5 +82,7 @@ const NewCardForm = ({ onPostCard, isOpen}) => {
 
 NewCardForm.propTypes = {
   onPostCard: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  toggleNewCardForm: PropTypes.bool.isRequired,
 };
 export default NewCardForm;

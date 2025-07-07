@@ -7,7 +7,7 @@ const kDefaultFormData = {
   owner: '',
 };
 
-const NewBoardForm = ({ onPostBoard, isOpen }) => {
+const NewBoardForm = ({ onPostBoard, isOpen, toggleNewBoardForm }) => {
   const [formData, setFormData] = useState(kDefaultFormData);
   const [errors, setErrors] = useState(kDefaultFormData);
   // const [touched, setTouched] = useState({ title: false, owner: false });
@@ -85,7 +85,10 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
   };
 
   return <section>
-    <h2>Create a new board</h2>
+    <h2>Create new board</h2>
+    <span> 
+      <button onClick={toggleNewBoardForm}>Hide form</button>
+    </span>
     <form onSubmit={handleSubmit} className="board-form">
       <div className="form-row">
         <label htmlFor="board-title">Title</label>
@@ -137,6 +140,7 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
 
 NewBoardForm.propTypes = {
   onPostBoard: PropTypes.func.isRequired,
-  isOpen:      PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  toggleNewBoardForm: PropTypes.bool.isRequired,
 };
 export default NewBoardForm;

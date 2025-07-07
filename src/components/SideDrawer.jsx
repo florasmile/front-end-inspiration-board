@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import './SideDrawer.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import NewBoardForm from './NewBoardForm';
 import NewCardForm from './NewCardForm';
@@ -15,6 +15,11 @@ const SideDrawer = ({ onPostBoard, onPostCard, onChangeMood, isOpen, closeDrawer
     const toggleCardFormDisplay = () => {
         setShowCardForm(showCardForm => !showCardForm);
     };
+    useEffect(()=> {
+        setShowBoardForm(false);
+        setShowCardForm(false);
+    }, [isOpen]
+    );
     return (
         <aside className={`side-drawer ${isOpen ? 'open' : ''}`}>
             <button className="close-button" onClick={closeDrawer}>❌</button>
@@ -22,25 +27,21 @@ const SideDrawer = ({ onPostBoard, onPostCard, onChangeMood, isOpen, closeDrawer
         <div>
             {
             !showBoardForm && 
-            <button onClick={toggleBoardFormDisplay}>+ Create a new board</button>  
+            <button onClick={toggleBoardFormDisplay}>+ new board</button>  
             } 
             {showBoardForm && 
-            <NewBoardForm onPostBoard={onPostBoard} isOpen={isOpen}/>
-            }
-            {showBoardForm && 
-            <button onClick={toggleBoardFormDisplay}>hide board form</button>
+            <NewBoardForm onPostBoard={onPostBoard} isOpen={isOpen} toggleNewBoardForm={toggleBoardFormDisplay}/>
             }
         </div>
         <div>
             {
             !showCardForm && 
-                <button onClick={toggleCardFormDisplay}>+ Create a new Card</button>  
+                <button onClick={toggleCardFormDisplay}>+ new Card</button>  
             } 
             {showCardForm && 
-                <NewCardForm onPostCard={onPostCard} isOpen={isOpen}/>
+                <NewCardForm onPostCard={onPostCard} isOpen={isOpen} toggleNewCardForm={toggleCardFormDisplay}/>
             }
-            {showCardForm && 
-            <button onClick={toggleCardFormDisplay}>hide card form</button>}
+
         </div>
             {/* MOOD SECTION */}
             <MoodSelector onChangeMood={onChangeMood} />
