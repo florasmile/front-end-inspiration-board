@@ -197,12 +197,14 @@ function App() {
         <main className="main-layout">
           <section className="board-section">
             <h1 className="board-title">Boards</h1>
-            <BoardList
-              boards={boards}
-              displayBoard={displayBoard}
-              deleteBoard={deleteBoard}
-              updateBoardTitle={updateBoardTitle}
-            />
+            <div className="board-container">
+              <BoardList
+                boards={boards}
+                displayBoard={displayBoard}
+                deleteBoard={deleteBoard}
+                updateBoardTitle={updateBoardTitle}
+              />
+            </div>          
           </section>
           <section
             className="card-section"
