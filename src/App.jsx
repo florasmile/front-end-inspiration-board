@@ -10,7 +10,7 @@ import SideDrawer from './components/SideDrawer';
 import { getAllBoardsApi, postBoardApi, deleteBoardApi, updateBoardApi } from './services/boardApi';
 import { postCardApi, getCardsApi, deleteCardApi, addCardLikesApi, updateCardApi } from './services/cardApi';
 
-const kDefaultBackgroundImg = `url(${new URL('./assets/cork.jpg', import.meta.url).href})`;
+const kDefaultBackgroundImg = `url(${new URL('./assets/default.jpg', import.meta.url).href})`;
 
 const convertCardData = ({ id, likes_count, message }) => {
   const converted = { id, message, likeCount: likes_count };
@@ -213,6 +213,7 @@ function App() {
             <div className="card-section-header">
               <h3 className="card-title">{curBoard.title} by {curBoard.owner}</h3>
             </div>
+            <div className="card-container"></div>
             <CardList
               cards={cards}
               increaseLikeCount={increaseLikeCount}

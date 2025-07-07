@@ -25,7 +25,7 @@ const SideDrawer = ({ onPostBoard, onPostCard, onChangeMood, isOpen, closeDrawer
             <button onClick={toggleBoardFormDisplay}>+ Create a new board</button>  
             } 
             {showBoardForm && 
-            <NewBoardForm onPostBoard={onPostBoard}/>
+            <NewBoardForm onPostBoard={onPostBoard} isOpen={isOpen}/>
             }
             {showBoardForm && 
             <button onClick={toggleBoardFormDisplay}>hide board form</button>
@@ -37,7 +37,7 @@ const SideDrawer = ({ onPostBoard, onPostCard, onChangeMood, isOpen, closeDrawer
                 <button onClick={toggleCardFormDisplay}>+ Create a new Card</button>  
             } 
             {showCardForm && 
-                <NewCardForm onPostCard={onPostCard}/>
+                <NewCardForm onPostCard={onPostCard} isOpen={isOpen}/>
             }
             {showCardForm && 
             <button onClick={toggleCardFormDisplay}>hide card form</button>}

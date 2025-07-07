@@ -1,14 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './NewCardForm.css';
 
-const NewCardForm = ({ onPostCard }) => {
+const NewCardForm = ({ onPostCard, isOpen}) => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const handleChange = (event) => {
     setMessage(event.target.value);
     setError(validate(event.target.value));
   };
+
+  useEffect(() => {
+    if (!isOpen) {
+      setMessage('');
+      setError('');
+    }
+  }, [isOpen]);
 
   const validate = (value) => {
     // if (!value.trim()) {
@@ -60,7 +67,7 @@ const NewCardForm = ({ onPostCard }) => {
           )}
         </div>
         <div className="icon-buttons">
-          <button disabled={!!error}>Submit</button>
+          <button type="submit" disabled={!!error}>Submit</button>
           <button onClick={handleReset}>Reset</button>
         </div>
       </form>
