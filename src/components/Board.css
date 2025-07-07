@@ -1,49 +1,61 @@
-.board-wrapper {
-  position: relative;
+.board-wrapper{
+  position: relative; 
   list-style: none;
   width: 100%;
-  margin-bottom: 0.5rem;
+  margin-bottom: .5rem;
   border-radius: 999px;
-  overflow: hidden;
+  overflow: hidden; 
 }
 
-button.board {
+button.board{
   all: unset;
   display: inline-block;
-  padding: 0.4rem 1.2rem;
-  background-color: rgb(101, 101, 100);
-  color: rgba(255, 255, 100);
-  font-family: inherit;
+  width: 100%;
+  max-width: 300px;
+  padding: .4rem 2rem;
+  background: rgb(101,101,100);
+  color: rgba(255,255,100);
+  font: inherit;
   font-size: 1rem;
   line-height: 1.2;
-  border-radius: 9999px;              
-  cursor: pointer;
   text-align: center;
   white-space: nowrap;
-  box-sizing: border-box;
-  width: 100%;                       
-  max-width: 300px; 
-}
-
-button.board:hover {
-  background-color: rgba(255, 255, 100);
-  color: rgb(101, 101, 100);
-}
-
-button.delete-button {
-  all: unset;
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  font-size: 0.85rem;
-  color: rgb(101, 101, 100);
+  border-radius: 9999px;
   cursor: pointer;
-  line-height: 1; 
+  box-sizing: border-box;
+}
+button.board:hover{
+  background: rgba(255,255,100);
+  color: rgb(101,101,100);
 }
 
-button.delete-button:hover {
-  color: rgb(236, 12, 12);
+.board-wrapper .board-actions{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-direction:reverse;  
+  pointer-events:none;
+  padding:0 .6rem; 
 }
 
+.board-wrapper .board-actions button{
+  all: unset;
+  pointer-events: auto;
+  font-size: .85rem;
+  line-height: 1;
+  color: rgb(101,101,100);
+  cursor: pointer;
+  transition: transform .15s, color .15s;
+}
+.board-wrapper .board-actions button:hover{ transform: scale(1.1); }
 
+.board-wrapper .board-actions .edit-button{
+  color: rgba(255,255,100,1); 
+}
+
+.board-edit-input {
+  border: 2px solid rgba(255, 255, 100, 1); 
+  outline: none;                            
+}
