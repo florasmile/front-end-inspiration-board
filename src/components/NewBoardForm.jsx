@@ -7,17 +7,17 @@ const kDefaultFormData = {
   owner: '',
 };
 
-const NewBoardForm = ({ onPostBoard, isOpen }) => {
+const NewBoardForm = ({ onPostBoard, isOpen, toggleNewBoardForm }) => {
   const [formData, setFormData] = useState(kDefaultFormData);
   const [errors, setErrors] = useState(kDefaultFormData);
-  const [touched, setTouched] = useState({ title: false, owner: false });
+  // const [touched, setTouched] = useState({ title: false, owner: false });
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   useEffect(() => {
     if (!isOpen) {
       setFormData(kDefaultFormData);
       setErrors(kDefaultFormData);
-      setTouched({ title: false, owner: false });
+      // setTouched({ title: false, owner: false });
       setHasSubmitted(false);
     }
   }, [isOpen]);
@@ -28,9 +28,6 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
     }
     if (value.length > 40) {
       return '⚠️ 40 max';
-    }
-    if (/[^a-zA-Z0-9 ]/.test(value)) {
-      return '⚠️ No special chars';
     }
     return '';
   };
@@ -50,7 +47,7 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
 
   const handleBlur = (event) => {
     const { name } = event.target;
-    setTouched(prev => ({ ...prev, [name]: true }));
+    // setTouched(prev => ({ ...prev, [name]: true }));
     setErrors(prev => ({ ...prev, [name]: validateField(name, formData[name]) }));
   };
 
@@ -70,7 +67,7 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
     onPostBoard(formData);
     setFormData(kDefaultFormData);
     setErrors(kDefaultFormData);
-    setTouched({ title: false, owner: false });
+    // setTouched({ title: false, owner: false });
     setHasSubmitted(false);
   };
 
@@ -83,9 +80,16 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
       errors.owner
     );
 
+  const handleReset = () => {
+    setFormData(kDefaultFormData);
+  };
+
   return <section>
-    <h2>Create a new board</h2>
-    <form onSubmit={handleSubmit} className="board-form">
+    <h2>Create new board</h2>
+    <span> 
+      <button onClick={toggleNewBoardForm}>Hide form</button>
+    </span>
+    <form onSubmit={handleSubmit}>
       <div className="form-row">
         <label htmlFor="board-title">Title</label>
         <input
@@ -97,7 +101,8 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
           onBlur={handleBlur}
           maxLength={41}
           placeholder="title is required"
-          className={((hasSubmitted || touched.title) && errors.title) ? 'error' : ''}
+          // className={((hasSubmitted || touched.title) && errors.title) ? 'error' : ''}
+          className={errors.title ? 'error' : ''}
         />
         <div className="form-feedback">
           {errors.title
@@ -116,7 +121,8 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
           onBlur={handleBlur}
           maxLength={41}
           placeholder="owner is required"
-          className={((hasSubmitted || touched.owner) && errors.owner) ? 'error' : ''}
+          // className={((hasSubmitted || touched.owner) && errors.owner) ? 'error' : ''}
+          className={errors.owner ? 'error' : ''}
         />
         <div className="form-feedback">
           {errors.owner
@@ -124,13 +130,17 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
             : <span className="char-count">{formData.owner.length}/40</span>}
         </div>
       </div>
-      <button type="submit" disabled={isSubmitDisabled}>Submit</button>
+      <div className="icon-buttons">
+        <button type="submit" disabled={isSubmitDisabled}>Submit</button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
     </form>
   </section>;
 };
 
 NewBoardForm.propTypes = {
   onPostBoard: PropTypes.func.isRequired,
-  isOpen:      PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  toggleNewBoardForm: PropTypes.bool.isRequired,
 };
 export default NewBoardForm;

@@ -131,3 +131,11 @@
 .icon-buttons button:hover {
   transform: scale(1.2);
 }
+
+.new-board-section {
+  margin-bottom: 2rem;
+}
+
+.new-card-section {
+  margin-bottom: 2rem;
+}

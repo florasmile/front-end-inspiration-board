@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './NewCardForm.css';
 
-const NewCardForm = ({ onPostCard }) => {
+const NewCardForm = ({ onPostCard, isOpen, toggleNewCardForm}) => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const handleChange = (event) => {
@@ -10,12 +10,19 @@ const NewCardForm = ({ onPostCard }) => {
     setError(validate(event.target.value));
   };
 
+  useEffect(() => {
+    if (!isOpen) {
+      setMessage('');
+      setError('');
+    }
+  }, [isOpen]);
+
   const validate = (value) => {
-    // if (!value.trim()) {
-    //   return 'This field is required';
-    // }
+    if (!value.trim()) {
+      return '⚠️';
+    }
     if (value.length > 40) {
-      return 'Maximum 40 characters allowed';
+      return '⚠️ 40 max';
     }
     return '';
   };
@@ -30,9 +37,17 @@ const NewCardForm = ({ onPostCard }) => {
     }
   };
 
+  const handleReset = () => {
+    setMessage('');
+  }
+
   return (
     <section>
-      <h2>Create a new card</h2>
+      <h2>Create new card</h2>
+      <span>
+        <button onClick={toggleNewCardForm}>Hide form</button>
+      </span>
+ 
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <label htmlFor="card-message">Message</label>
@@ -55,8 +70,10 @@ const NewCardForm = ({ onPostCard }) => {
             <span className="char-count">{message.length}/40</span>
           )}
         </div>
-
-        <button type="submit" disabled={!!error}>Submit</button>
+        <div className="icon-buttons">
+          <button type="submit" disabled={!!error}>Submit</button>
+          <button onClick={handleReset}>Reset</button>
+        </div>
       </form>
     </section>
   );
@@ -65,5 +82,7 @@ const NewCardForm = ({ onPostCard }) => {
 
 NewCardForm.propTypes = {
   onPostCard: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  toggleNewCardForm: PropTypes.bool.isRequired,
 };
 export default NewCardForm;

@@ -14,7 +14,7 @@ const MoodSelector = ({ onChangeMood }) => {
   };
   return (
     <section>
-      <h2>Create a New Mood</h2>
+      <h2>Choose your Mood</h2>
       <div className="form-row">
         <label htmlFor="mood-select">Mood</label>
         <select id="mood-select" onChange={handleMoodChange} value={currentMood}>
