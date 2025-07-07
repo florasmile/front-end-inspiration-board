@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Board from './Board.jsx';
 import './BoardList.css';
 
-const BoardList = ({ boards, displayBoard, deleteBoard }) => {
+const BoardList = ({ boards, displayBoard, deleteBoard, updateBoardTitle }) => {
   const getBoardListJSX = (boards) => {
     return boards.map((board) => {
       return (
@@ -13,6 +13,7 @@ const BoardList = ({ boards, displayBoard, deleteBoard }) => {
           owner={board.owner}
           displayBoard={displayBoard}
           deleteBoard={deleteBoard}
+          updateBoardTitle={updateBoardTitle}
         />
       );
     })
@@ -33,7 +34,7 @@ BoardList.propTypes = {
     })
   ).isRequired,
   displayBoard: PropTypes.func.isRequired,
-  deleteBoard: PropTypes.func.isRequired
+  deleteBoard: PropTypes.func.isRequired,
 };
 
 export default BoardList;

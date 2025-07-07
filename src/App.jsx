@@ -7,8 +7,8 @@ import BoardList from './components/BoardList';
 import CardList from './components/CardList';
 import MoodSelector from './components/MoodSelector';
 import SideDrawer from './components/SideDrawer';
-import { getAllBoardsApi, postBoardApi, deleteBoardApi } from './services/boardApi';
-import { postCardApi, getCardsApi, deleteCardApi, addCardLikesApi,updateCardApi} from './services/cardApi';
+import { getAllBoardsApi, postBoardApi, deleteBoardApi, updateBoardApi } from './services/boardApi';
+import { postCardApi, getCardsApi, deleteCardApi, addCardLikesApi, updateCardApi } from './services/cardApi';
 
 const kDefaultBackgroundImg = `url(${new URL('./assets/cork.jpg', import.meta.url).href})`;
 
@@ -78,7 +78,7 @@ function App() {
         prevCards.map(card =>
           card.id === id ? { ...card, likeCount: card.likeCount + 1 } : card
         )
-    );
+      );
       // console.log(cards);
     } catch (error) {
       console.log(error);
@@ -90,9 +90,18 @@ function App() {
       await updateCardApi(id, newMessage);
       setCards(prevCards =>
         prevCards.map(card =>
-          card.id === id ? { ...card, message: newMessage } : card
-        )
-      );
+          card.id === id ? { ...card, message: newMessage } : card));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateBoardTitle = async (id, newTitle) => {
+    try {
+      await updateBoardApi(id, newTitle);
+      setBoards(prevBoards =>
+        prevBoards.map(board =>
+          board.id === id ? { ...board, title: newTitle } : board));
     } catch (error) {
       console.log(error);
     }
@@ -155,6 +164,7 @@ function App() {
   //   setShowCardForm(showCardForm => !showCardForm);
   // };
 
+
   const changeMood = (moodName) => {
     console.log(moodName);
     setBackgroundImg(`url(${new URL(`./assets/${moodName}.jpg`, import.meta.url).href})`);
@@ -193,6 +203,7 @@ function App() {
               boards={boards}
               displayBoard={displayBoard}
               deleteBoard={deleteBoard}
+              updateBoardTitle={updateBoardTitle}
             />
           </div>
         </section>

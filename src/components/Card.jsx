@@ -5,13 +5,13 @@ import './Card.css';
 const Card = ({ id, message, likeCount, increaseLikeCount, deleteCard, updateCardMessage }) => {
   const [editing, setEditing] = useState(false);
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      const txt = e.target.value.trim();
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      const txt = event.target.value.trim();
       if (txt && txt !== message) updateCardMessage(id, txt);
       setEditing(false);
     }
-    if (e.key === 'Escape') setEditing(false);
+    if (event.key === 'Escape') setEditing(false);
   };
 
   return (
