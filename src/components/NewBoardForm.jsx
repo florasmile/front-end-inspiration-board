@@ -10,14 +10,14 @@ const kDefaultFormData = {
 const NewBoardForm = ({ onPostBoard, isOpen }) => {
   const [formData, setFormData] = useState(kDefaultFormData);
   const [errors, setErrors] = useState(kDefaultFormData);
-  const [touched, setTouched] = useState({ title: false, owner: false });
+  // const [touched, setTouched] = useState({ title: false, owner: false });
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   useEffect(() => {
     if (!isOpen) {
       setFormData(kDefaultFormData);
       setErrors(kDefaultFormData);
-      setTouched({ title: false, owner: false });
+      // setTouched({ title: false, owner: false });
       setHasSubmitted(false);
     }
   }, [isOpen]);
@@ -29,9 +29,6 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
     if (value.length > 40) {
       return '⚠️ 40 max';
     }
-    // if (/[^a-zA-Z0-9 ]/.test(value)) {
-    //   return '⚠️ No special chars';
-    // }
     return '';
   };
 
@@ -50,7 +47,7 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
 
   const handleBlur = (event) => {
     const { name } = event.target;
-    setTouched(prev => ({ ...prev, [name]: true }));
+    // setTouched(prev => ({ ...prev, [name]: true }));
     setErrors(prev => ({ ...prev, [name]: validateField(name, formData[name]) }));
   };
 
@@ -70,7 +67,7 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
     onPostBoard(formData);
     setFormData(kDefaultFormData);
     setErrors(kDefaultFormData);
-    setTouched({ title: false, owner: false });
+    // setTouched({ title: false, owner: false });
     setHasSubmitted(false);
   };
 
@@ -101,7 +98,8 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
           onBlur={handleBlur}
           maxLength={41}
           placeholder="title is required"
-          className={((hasSubmitted || touched.title) && errors.title) ? 'error' : ''}
+          // className={((hasSubmitted || touched.title) && errors.title) ? 'error' : ''}
+          className={errors.title ? 'error' : ''}
         />
         <div className="form-feedback">
           {errors.title
@@ -120,7 +118,8 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
           onBlur={handleBlur}
           maxLength={41}
           placeholder="owner is required"
-          className={((hasSubmitted || touched.owner) && errors.owner) ? 'error' : ''}
+          // className={((hasSubmitted || touched.owner) && errors.owner) ? 'error' : ''}
+          className={errors.owner ? 'error' : ''}
         />
         <div className="form-feedback">
           {errors.owner
@@ -129,7 +128,7 @@ const NewBoardForm = ({ onPostBoard, isOpen }) => {
         </div>
       </div>
       <div className="icon-buttons">
-        <button disabled={isSubmitDisabled}>Submit</button>
+        <button type="submit" disabled={isSubmitDisabled}>Submit</button>
         <button onClick={handleReset}>Reset</button>
       </div>
     </form>

@@ -18,11 +18,11 @@ const NewCardForm = ({ onPostCard, isOpen}) => {
   }, [isOpen]);
 
   const validate = (value) => {
-    // if (!value.trim()) {
-    //   return 'This field is required';
-    // }
+    if (!value.trim()) {
+      return '⚠️';
+    }
     if (value.length > 40) {
-      return 'Maximum 40 characters allowed';
+      return '⚠️ 40 max';
     }
     return '';
   };
