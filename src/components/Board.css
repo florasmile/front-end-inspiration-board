@@ -23,6 +23,9 @@ button.board{
   border-radius: 9999px;
   cursor: pointer;
   box-sizing: border-box;
+  white-space: normal;         
+  word-break: break-word;      
+  overflow-wrap: break-word; 
 }
 button.board:hover{
   background: rgba(255,255,100);

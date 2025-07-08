@@ -13,7 +13,6 @@
 .board-section {
   position: relative;
   overflow: hidden;
-
   flex: 0 0 25%;
   max-width: 25%;
   min-width: 250px;

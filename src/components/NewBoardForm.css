@@ -30,19 +30,16 @@ label {
   flex: 1;
   padding: 0.5rem;
   border-radius: 6px;
-  border: 1px solid rgb(101, 101, 100);
+  border: 3px solid rgb(101, 101, 100);
+  
 }
 
 .form-row input:focus,
 .form-row select:focus {
-  outline: 2px solid rgba(255, 255, 100);
+  outline: 3px solid rgba(255, 255, 100);
 }
 
 .form-row input.error,
 .form-row input.error:focus {
   border: 2px solid #d9534f !important;
-  outline: 2px solid #d9534f !important;
-  box-shadow: 0 0 4px rgba(217, 83, 79, 0.6);
 }
-
-

@@ -14,6 +14,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  word-wrap: break-word;      /* переносит длинные слова */
+  overflow-wrap: break-word;  /* для совместимости */
+  white-space: normal; 
 }
 
 .card-box:hover {
@@ -60,15 +63,6 @@
   font-size: 1.2rem;
   line-height: 1;
   cursor: pointer;
-}
-
-/* DOESN'T WORK! */
-.card-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 0.5rem;
-  gap: 0.5rem;
 }
 
 .card-edit-input {
