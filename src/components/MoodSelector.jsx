@@ -1,5 +1,3 @@
-//import { useState } from 'react';
-
 const MoodSelector = ({ onChangeMood, currentMood }) => {
   const moodOptions = [
     'anger', 'black&white', 'default', 'disgust', 'faces', 'fear',

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import './NewCardForm.css';
 
@@ -13,21 +13,7 @@ const NewCardForm = ({ onPostCard, isOpen, submitCard, setSubmitCard, resetCard,
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    if (submitCard) {
-      handleSubmit();
-      setSubmitCard(false);
-    }
-  }, [submitCard]);
-
-  useEffect(() => {
-    if (resetCard) {
-      handleReset();
-      setResetCard(false);
-    }
-  }, [resetCard]);
-
-  const validate = (value) => {
+    const validate = useCallback((value) => {
     if (!value.trim()) {
       return '⚠️';
     }
@@ -35,15 +21,9 @@ const NewCardForm = ({ onPostCard, isOpen, submitCard, setSubmitCard, resetCard,
       return '⚠️ 40 max';
     }
     return '';
-  };
+  }, []);
 
-  const handleChange = (event) => {
-    const value = event.target.value;
-    setMessage(value);
-    setError(validate(value));
-  };
-
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(() => {
     const validationError = validate(message);
     setError(validationError);
     if (!validationError) {
@@ -51,7 +31,29 @@ const NewCardForm = ({ onPostCard, isOpen, submitCard, setSubmitCard, resetCard,
       setMessage('');
       setError('');
     }
+  }, [message, onPostCard, validate]);
+
+  useEffect(() => {
+    if (submitCard) {
+      handleSubmit();
+      setSubmitCard(false);
+    }
+  }, [handleSubmit, setSubmitCard, submitCard]);
+
+  useEffect(() => {
+    if (resetCard) {
+      handleReset();
+      setResetCard(false);
+    }
+  }, [resetCard, setResetCard]);
+
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setMessage(value);
+    setError(validate(value));
   };
+
 
   const handleReset = () => {
     setMessage('');

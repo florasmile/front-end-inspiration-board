@@ -1,11 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import './App.css';
-
 import Header from './components/Header';
 import Footer from './components/Footer';
 import BoardList from './components/BoardList';
 import CardList from './components/CardList';
-//import MoodSelector from './components/MoodSelector';
 import SideDrawer from './components/SideDrawer';
 import { getAllBoardsApi, postBoardApi, deleteBoardApi, updateBoardApi } from './services/boardApi';
 import { postCardApi, getCardsApi, deleteCardApi, addCardLikesApi, updateCardApi } from './services/cardApi';
@@ -23,11 +21,9 @@ function App() {
     title: '',
     owner: '',
   });
-  const [cards, setCards] = useState([]);
-  // const [showBoardForm, setShowBoardForm] = useState(false);
-  // const [showCardForm, setShowCardForm] = useState(false);
-  const [backgroundImg, setBackgroundImg] = useState(kDefaultBackgroundImg);
 
+  const [cards, setCards] = useState([]);
+  const [backgroundImg, setBackgroundImg] = useState(kDefaultBackgroundImg);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const getAllBoards = async () => {
@@ -52,10 +48,21 @@ function App() {
     }
   }, [boards]);
 
+  const fetchCards = useCallback(async () => {
+    if (curBoard && curBoard.id) {
+      try {
+        const fetchCards = await getCardsApi(curBoard.id);
+        setCards(fetchCards.map(card => convertCardData(card)));
+      } catch (error) {
+        console.log(error);
+        setCards([]);
+      }
+    }
+  }, [curBoard]);
+
   useEffect(() => {
     fetchCards();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [curBoard]);
+  }, [curBoard, fetchCards]);
 
 
   const displayBoard = (id) => {
@@ -66,7 +73,6 @@ function App() {
       return result[0];
     });
     // send API calls to get a list of cards of current board to display; and call setCards
-
   };
 
   const increaseLikeCount = async (id) => {
@@ -115,36 +121,18 @@ function App() {
     } catch (error) {
       console.log('failed to create a new board', error);
     }
-    // toggleBoardFormDisplay();
   };
-
-  //   const handleMoodChange = (newMood) => {
-  //   setMood(newMood);
-  // };
 
   const postCard = async (newCardData) => {
     // make a call to backend to create a new card
     try {
       await postCardApi(newCardData, curBoard.id);
-      // setCurBoard(prevBoard => ({...prevBoard}));//getCards from backend to trigger rerender
       fetchCards();
     } catch (error) {
       console.log(error);
     }
-    // toggleCardFormDisplay();
   }
 
-  const fetchCards = async () => {
-    if (curBoard && curBoard.id) {
-      try {
-        const fetchCards = await getCardsApi(curBoard.id);
-        setCards(fetchCards.map(card => convertCardData(card)));
-      } catch (error) {
-        console.log(error);
-        setCards([]);
-      }
-    }
-  };
 
   const deleteCard = async (id) => {
     // when user clicks "delete" button, we make a delete request to backend API to delete a card
@@ -155,14 +143,6 @@ function App() {
       console.log(error)
     }
   };
-
-  // const toggleBoardFormDisplay = () => {
-  //   setShowBoardForm(showBoardForm => !showBoardForm);
-  // };
-
-  // const toggleCardFormDisplay = () => {
-  //   setShowCardForm(showCardForm => !showCardForm);
-  // };
 
   const [mood, setMood] = useState('default');
   const changeMood = (moodName) => {
@@ -181,8 +161,6 @@ function App() {
   }
 
   return (
-    // <div className="app-wrapper">
-    // <div className={`app-wrapper ${mood}`}>
     <>
       <div className="app-wrapper" >
         <Header onOpenDrawer={() => setDrawerOpen(true)} />
@@ -194,7 +172,6 @@ function App() {
           onPostCard={postCard}
           onChangeMood={changeMood}
           mood={mood}
-        // curBoard={curBoard}
         />
         <main className="main-layout">
           <section className="board-section">

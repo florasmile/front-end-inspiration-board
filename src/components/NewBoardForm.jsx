@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import './NewBoardForm.css';
 
@@ -19,19 +19,33 @@ const NewBoardForm = ({ onPostBoard, isOpen, submitBoard, setSubmitBoard, resetB
     }
   }, [isOpen]);
 
+  const handleSubmit = useCallback(() => {
+    const newErrors = {
+      title: validateField('title', formData.title),
+      owner: validateField('owner', formData.owner),
+    };
+    setErrors(newErrors);
+
+    if (Object.values(newErrors).some(Boolean)) return;
+
+    onPostBoard(formData);
+    setFormData(kDefaultFormData);
+    setErrors(kDefaultFormData);
+  }, [formData, onPostBoard]);
+
   useEffect(() => {
     if (submitBoard) {
       handleSubmit();
       setSubmitBoard(false);
     }
-  }, [submitBoard]);
+  }, [handleSubmit, setSubmitBoard, submitBoard]);
 
   useEffect(() => {
     if (resetBoard) {
       handleReset();
       setResetBoard(false);
     }
-  }, [resetBoard]);
+  }, [resetBoard, setResetBoard]);
 
   const validateField = (name, value) => {
     if (!value.trim()) return '⚠️';
@@ -50,20 +64,6 @@ const NewBoardForm = ({ onPostBoard, isOpen, submitBoard, setSubmitBoard, resetB
     setErrors(prev => ({ ...prev, [name]: validateField(name, formData[name]) }));
   };
 
-  const handleSubmit = () => {
-    const newErrors = {
-      title: validateField('title', formData.title),
-      owner: validateField('owner', formData.owner),
-    };
-    setErrors(newErrors);
-
-    if (Object.values(newErrors).some(Boolean)) return;
-
-    onPostBoard(formData);
-    setFormData(kDefaultFormData);
-    setErrors(kDefaultFormData);
-  };
-
   const handleReset = () => {
     setFormData(kDefaultFormData);
     setErrors(kDefaultFormData);
@@ -72,7 +72,7 @@ const NewBoardForm = ({ onPostBoard, isOpen, submitBoard, setSubmitBoard, resetB
   return (
     <section>
       <h2>New Board</h2>
-      <form>
+      <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
         <div className="form-row">
           <label htmlFor="board-title">Title</label>
           <input
