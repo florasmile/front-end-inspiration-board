@@ -14,6 +14,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  word-wrap: break-word;      
+  overflow-wrap: break-word;  
+  white-space: normal; 
 }
 
 .card-box:hover {
@@ -62,19 +65,11 @@
   cursor: pointer;
 }
 
-/* DOESN'T WORK! */
-.card-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 0.5rem;
-  gap: 0.5rem;
-}
-
 .card-edit-input {
   border: 2px solid rgba(255, 255, 100, 1);
   outline: none; 
 }
+
 .card-box:hover .card-edit-input {
   border-color: rgb(101, 101, 100);
 }

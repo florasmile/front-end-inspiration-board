@@ -14,9 +14,9 @@ const MoodSelector = ({ onChangeMood }) => {
   };
   return (
     <section>
-      <h2>Choose your Mood</h2>
+      <h2>New Mood</h2>
       <div className="form-row">
-        <label htmlFor="mood-select">Mood</label>
+        <label htmlFor="mood-select">Choose</label>
         <select id="mood-select" onChange={handleMoodChange} value={currentMood}>
           <option value="" disabled>choose a mood</option>
           {moodOptions.map(mood => (

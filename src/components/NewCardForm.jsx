@@ -2,13 +2,9 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './NewCardForm.css';
 
-const NewCardForm = ({ onPostCard, isOpen, toggleNewCardForm}) => {
+const NewCardForm = ({ onPostCard, isOpen, submitCard, setSubmitCard, resetCard, setResetCard }) => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-  const handleChange = (event) => {
-    setMessage(event.target.value);
-    setError(validate(event.target.value));
-  };
 
   useEffect(() => {
     if (!isOpen) {
@@ -16,6 +12,20 @@ const NewCardForm = ({ onPostCard, isOpen, toggleNewCardForm}) => {
       setError('');
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (submitCard) {
+      handleSubmit();
+      setSubmitCard(false);
+    }
+  }, [submitCard]);
+
+  useEffect(() => {
+    if (resetCard) {
+      handleReset();
+      setResetCard(false);
+    }
+  }, [resetCard]);
 
   const validate = (value) => {
     if (!value.trim()) {
@@ -27,28 +37,31 @@ const NewCardForm = ({ onPostCard, isOpen, toggleNewCardForm}) => {
     return '';
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setMessage(value);
+    setError(validate(value));
+  };
+
+  const handleSubmit = () => {
     const validationError = validate(message);
     setError(validationError);
     if (!validationError) {
-      onPostCard({ message: message });
+      onPostCard({ message });
       setMessage('');
+      setError('');
     }
   };
 
   const handleReset = () => {
     setMessage('');
-  }
+    setError('');
+  };
 
   return (
     <section>
-      <h2>Create new card</h2>
-      <span>
-        <button onClick={toggleNewCardForm}>Hide form</button>
-      </span>
- 
-      <form onSubmit={handleSubmit}>
+      <h2>New Card</h2>
+      <form>
         <div className="form-row">
           <label htmlFor="card-message">Message</label>
           <input
@@ -70,19 +83,18 @@ const NewCardForm = ({ onPostCard, isOpen, toggleNewCardForm}) => {
             <span className="char-count">{message.length}/40</span>
           )}
         </div>
-        <div className="icon-buttons">
-          <button type="submit" disabled={!!error}>Submit</button>
-          <button onClick={handleReset}>Reset</button>
-        </div>
       </form>
     </section>
   );
 };
 
-
 NewCardForm.propTypes = {
   onPostCard: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  toggleNewCardForm: PropTypes.bool.isRequired,
+  submitCard: PropTypes.bool.isRequired,
+  setSubmitCard: PropTypes.func.isRequired,
+  resetCard: PropTypes.bool.isRequired,
+  setResetCard: PropTypes.func.isRequired,
 };
+
 export default NewCardForm;

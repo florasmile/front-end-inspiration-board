@@ -23,7 +23,11 @@ button.board{
   border-radius: 9999px;
   cursor: pointer;
   box-sizing: border-box;
+  white-space: normal;         
+  word-break: break-word;      
+  overflow-wrap: break-word; 
 }
+
 button.board:hover{
   background: rgba(255,255,100);
   color: rgb(101,101,100);
@@ -49,6 +53,7 @@ button.board:hover{
   cursor: pointer;
   transition: transform .15s, color .15s;
 }
+
 .board-wrapper .board-actions button:hover{ transform: scale(1.1); }
 
 .board-wrapper .board-actions .edit-button{

@@ -1,11 +1,9 @@
-
 label {
-  margin-right: 0.5em; /* add Horizontal space */
+  margin-right: 0.5em; 
 }
 
 input.error {
-  outline: 2px solid #ff4444;  /* Red outline */
-  /* border-color: #ff4444; */
+  outline: 2px solid #ff4444;  
 }
 
 .error {
