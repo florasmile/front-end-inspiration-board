@@ -58,7 +58,6 @@ const NewCardForm = ({ onPostCard, isOpen, submitCard, setSubmitCard, resetCard,
     setError('');
   };
 
-
   return (
     <section>
       <h2>New Card</h2>

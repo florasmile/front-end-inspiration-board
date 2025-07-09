@@ -14,8 +14,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  word-wrap: break-word;      /* переносит длинные слова */
-  overflow-wrap: break-word;  /* для совместимости */
+  word-wrap: break-word;      
+  overflow-wrap: break-word;  
   white-space: normal; 
 }
 
@@ -69,6 +69,7 @@
   border: 2px solid rgba(255, 255, 100, 1);
   outline: none; 
 }
+
 .card-box:hover .card-edit-input {
   border-color: rgb(101, 101, 100);
 }

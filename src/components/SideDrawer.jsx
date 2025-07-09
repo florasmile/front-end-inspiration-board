@@ -17,10 +17,6 @@ const SideDrawer = ({ onPostBoard, onPostCard, onChangeMood, isOpen, closeDrawer
   const [submitCard, setSubmitCard] = useState(false);
   const [resetCard, setResetCard] = useState(false);
 
-  // const toggleBoardFormDisplay = () => setShowBoardForm(prev => !prev);
-  // const toggleCardFormDisplay = () => setShowCardForm(prev => !prev);
-  // const toggleMoodSelectorDisplay = () => setShowMoodSelector(prev => !prev);
-
   useEffect(() => {
     setShowBoardForm(false);
     setShowCardForm(false);

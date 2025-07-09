@@ -69,8 +69,6 @@ const NewBoardForm = ({ onPostBoard, isOpen, submitBoard, setSubmitBoard, resetB
     setErrors(kDefaultFormData);
   };
 
-    
-
   return (
     <section>
       <h2>New Board</h2>

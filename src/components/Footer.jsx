@@ -1,4 +1,4 @@
-import './Footer.css'; // ✅ подключаем CSS-файл
+import './Footer.css'; 
 
 const Footer = () => {
   return (
