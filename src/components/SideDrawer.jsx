@@ -6,7 +6,7 @@ import NewBoardForm from './NewBoardForm';
 import NewCardForm from './NewCardForm';
 import MoodSelector from './MoodSelector';
 
-const SideDrawer = ({ onPostBoard, onPostCard, onChangeMood, isOpen, closeDrawer }) => {
+const SideDrawer = ({ onPostBoard, onPostCard, onChangeMood, isOpen, closeDrawer, mood}) => {
   const [showBoardForm, setShowBoardForm] = useState(false);
   const [showCardForm, setShowCardForm] = useState(false);
   const [showMoodSelector, setShowMoodSelector] = useState(false);
@@ -125,7 +125,7 @@ const SideDrawer = ({ onPostBoard, onPostCard, onChangeMood, isOpen, closeDrawer
           </button>
         ) : (
           <div className="form-section">
-            <MoodSelector onChangeMood={onChangeMood} />
+            <MoodSelector onChangeMood={onChangeMood} currentMood={mood} />
             <div className="form-controls">
               <button
                 className="circle-btn"
@@ -148,6 +148,7 @@ SideDrawer.propTypes = {
   onChangeMood: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   closeDrawer: PropTypes.func.isRequired,
+  mood: PropTypes.string.isRequired
 };
 
 export default SideDrawer;

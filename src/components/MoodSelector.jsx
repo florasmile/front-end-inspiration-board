@@ -1,17 +1,16 @@
-import { useState } from 'react';
+//import { useState } from 'react';
 
-const MoodSelector = ({ onChangeMood }) => {
+const MoodSelector = ({ onChangeMood, currentMood }) => {
   const moodOptions = [
     'anger', 'black&white', 'default', 'disgust', 'faces', 'fear',
     'happiness', 'neutral', 'pride', 'sadness', 'surprise', 'tnx'
   ];
-  const [currentMood, setCurrentMood] = useState('default');
 
   const handleMoodChange = (event) => {
     const selectedMood = event.target.value;
     onChangeMood(selectedMood);
-    setCurrentMood(selectedMood);
   };
+
   return (
     <section>
       <h2>New Mood</h2>
@@ -26,5 +25,5 @@ const MoodSelector = ({ onChangeMood }) => {
       </div>
     </section>
   );
-}
+};
 export default MoodSelector;

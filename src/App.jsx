@@ -5,7 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import BoardList from './components/BoardList';
 import CardList from './components/CardList';
-import MoodSelector from './components/MoodSelector';
+//import MoodSelector from './components/MoodSelector';
 import SideDrawer from './components/SideDrawer';
 import { getAllBoardsApi, postBoardApi, deleteBoardApi, updateBoardApi } from './services/boardApi';
 import { postCardApi, getCardsApi, deleteCardApi, addCardLikesApi, updateCardApi } from './services/cardApi';
@@ -164,8 +164,9 @@ function App() {
   //   setShowCardForm(showCardForm => !showCardForm);
   // };
 
-
+  const [mood, setMood] = useState('default');
   const changeMood = (moodName) => {
+    setMood(moodName);
     console.log(moodName);
     setBackgroundImg(`url(${new URL(`./assets/${moodName}.jpg`, import.meta.url).href})`);
   };
@@ -192,6 +193,7 @@ function App() {
           onPostBoard={postBoard}
           onPostCard={postCard}
           onChangeMood={changeMood}
+          mood={mood}
         // curBoard={curBoard}
         />
         <main className="main-layout">
