@@ -7,23 +7,31 @@ const kDefaultFormData = {
   owner: '',
 };
 
-const NewBoardForm = ({ onPostBoard, isOpen, forwardedSubmit, forwardedReset }) => {
+const NewBoardForm = ({ onPostBoard, isOpen, submitBoard, setSubmitBoard, resetBoard, setResetBoard }) => {
   const [formData, setFormData] = useState(kDefaultFormData);
   const [errors, setErrors] = useState(kDefaultFormData);
-  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   useEffect(() => {
     if (!isOpen) {
       setFormData(kDefaultFormData);
       setErrors(kDefaultFormData);
-      setHasSubmitted(false);
+
     }
   }, [isOpen]);
 
   useEffect(() => {
-    if (forwardedSubmit) forwardedSubmit.current = handleSubmit;
-    if (forwardedReset) forwardedReset.current = handleReset;
-  }, [formData, errors]);
+    if (submitBoard) {
+      handleSubmit();
+      setSubmitBoard(false);
+    }
+  }, [submitBoard]);
+
+  useEffect(() => {
+    if (resetBoard) {
+      handleReset();
+      setResetBoard(false);
+    }
+  }, [resetBoard]);
 
   const validateField = (name, value) => {
     if (!value.trim()) return '⚠️';
@@ -43,8 +51,6 @@ const NewBoardForm = ({ onPostBoard, isOpen, forwardedSubmit, forwardedReset }) 
   };
 
   const handleSubmit = () => {
-    setHasSubmitted(true);
-
     const newErrors = {
       title: validateField('title', formData.title),
       owner: validateField('owner', formData.owner),
@@ -56,20 +62,14 @@ const NewBoardForm = ({ onPostBoard, isOpen, forwardedSubmit, forwardedReset }) 
     onPostBoard(formData);
     setFormData(kDefaultFormData);
     setErrors(kDefaultFormData);
-    setHasSubmitted(false);
   };
 
   const handleReset = () => {
     setFormData(kDefaultFormData);
     setErrors(kDefaultFormData);
-    setHasSubmitted(false);
   };
 
-  const isSubmitDisabled =
-    !formData.title.trim() ||
-    !formData.owner.trim() ||
-    errors.title ||
-    errors.owner;
+    
 
   return (
     <section>
@@ -122,9 +122,10 @@ const NewBoardForm = ({ onPostBoard, isOpen, forwardedSubmit, forwardedReset }) 
 NewBoardForm.propTypes = {
   onPostBoard: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  
-  forwardedSubmit: PropTypes.object,
-  forwardedReset: PropTypes.object,
+  submitBoard: PropTypes.bool.isRequired,
+  setSubmitBoard: PropTypes.func.isRequired,
+  resetBoard: PropTypes.bool.isRequired,
+  setResetBoard: PropTypes.func.isRequired,
 };
 
 export default NewBoardForm;

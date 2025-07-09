@@ -2,9 +2,30 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './NewCardForm.css';
 
-const NewCardForm = ({ onPostCard, isOpen, forwardedSubmit, forwardedReset }) => {
+const NewCardForm = ({ onPostCard, isOpen, submitCard, setSubmitCard, resetCard, setResetCard }) => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (!isOpen) {
+      setMessage('');
+      setError('');
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (submitCard) {
+      handleSubmit();
+      setSubmitCard(false);
+    }
+  }, [submitCard]);
+
+  useEffect(() => {
+    if (resetCard) {
+      handleReset();
+      setResetCard(false);
+    }
+  }, [resetCard]);
 
   const validate = (value) => {
     if (!value.trim()) {
@@ -22,24 +43,13 @@ const NewCardForm = ({ onPostCard, isOpen, forwardedSubmit, forwardedReset }) =>
     setError(validate(value));
   };
 
-  useEffect(() => {
-    if (!isOpen) {
-      setMessage('');
-      setError('');
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (forwardedSubmit) forwardedSubmit.current = handleSubmit;
-    if (forwardedReset) forwardedReset.current = handleReset;
-  }, [message, error]);
-
   const handleSubmit = () => {
     const validationError = validate(message);
     setError(validationError);
     if (!validationError) {
-      onPostCard({ message: message });
+      onPostCard({ message });
       setMessage('');
+      setError('');
     }
   };
 
@@ -47,6 +57,7 @@ const NewCardForm = ({ onPostCard, isOpen, forwardedSubmit, forwardedReset }) =>
     setMessage('');
     setError('');
   };
+
 
   return (
     <section>
@@ -81,8 +92,10 @@ const NewCardForm = ({ onPostCard, isOpen, forwardedSubmit, forwardedReset }) =>
 NewCardForm.propTypes = {
   onPostCard: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  forwardedSubmit: PropTypes.object,
-  forwardedReset: PropTypes.object,
+  submitCard: PropTypes.bool.isRequired,
+  setSubmitCard: PropTypes.func.isRequired,
+  resetCard: PropTypes.bool.isRequired,
+  setResetCard: PropTypes.func.isRequired,
 };
 
 export default NewCardForm;
