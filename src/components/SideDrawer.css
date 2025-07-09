@@ -106,7 +106,7 @@
   left: auto;
   right: 0;
   width: 600px; 
-  height: 100vh;
+  height: 1000px;
   background-color: rgba(142, 139, 139, 0.631); 
   z-index: -1;
   pointer-events: none;
