@@ -25,6 +25,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [backgroundImg, setBackgroundImg] = useState(kDefaultBackgroundImg);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [sortOption, setSortOption] = useState('none');
 
   const getAllBoards = async () => {
     //call Api to get all boards
@@ -64,6 +65,18 @@ function App() {
     fetchCards();
   }, [curBoard, fetchCards]);
 
+  const sortCards = (cardsToSort, sortBy) => {
+    if (sortBy === 'id') {
+      return [...cardsToSort].sort((a, b) => a.id - b.id);
+    } else if (sortBy === 'alphabetical') {
+      return [...cardsToSort].sort((a, b) => a.message.localeCompare(b.message));
+    } else if (sortBy === 'likes') {
+      return [...cardsToSort].sort((a, b) => b.likeCount - a.likeCount);
+    }
+    return cardsToSort;
+  };
+
+  const sortedCards = sortCards(cards, sortOption);
 
   const displayBoard = (id) => {
     // when a board is selected, we want to display its title, owner's name, and all cards;
@@ -183,7 +196,7 @@ function App() {
                 deleteBoard={deleteBoard}
                 updateBoardTitle={updateBoardTitle}
               />
-            </div>          
+            </div>
           </section>
           <section
             className="card-section"
@@ -193,10 +206,24 @@ function App() {
           >
             <div className="card-section-header">
               <h3 className="card-title">{curBoard.title} by {curBoard.owner}</h3>
+              <div className="sort-controls">
+                <label htmlFor="sort-select" className="sort-label">Sort by:</label>
+                <select
+                  id="sort-select"
+                  className="sort-select"
+                  value={sortOption}
+                  onChange={(e) => setSortOption(e.target.value)}
+                >
+                  <option value="none">Default</option>
+                  <option value="id">Added</option>
+                  <option value="alphabetical">Alphabetical</option>
+                  <option value="likes">Likes</option>
+                </select>
+              </div>
             </div>
             <div className="card-container"></div>
             <CardList
-              cards={cards}
+              cards={sortedCards}
               increaseLikeCount={increaseLikeCount}
               deleteCard={deleteCard}
               updateCardMessage={updateCardMessage}

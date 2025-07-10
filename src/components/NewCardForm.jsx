@@ -54,6 +54,17 @@ const NewCardForm = ({ onPostCard, isOpen, submitCard, setSubmitCard, resetCard,
     setError(validate(value));
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSubmit();
+    }
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    handleSubmit();
+  };
 
   const handleReset = () => {
     setMessage('');
@@ -63,7 +74,7 @@ const NewCardForm = ({ onPostCard, isOpen, submitCard, setSubmitCard, resetCard,
   return (
     <section>
       <h2>New Card</h2>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <div className="form-row">
           <label htmlFor="card-message">Message</label>
           <input
@@ -72,6 +83,7 @@ const NewCardForm = ({ onPostCard, isOpen, submitCard, setSubmitCard, resetCard,
             name="message"
             value={message}
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
             onBlur={() => setError(validate(message))}
             maxLength={41}
             placeholder="message is required"

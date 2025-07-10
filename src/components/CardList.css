@@ -1,18 +1,20 @@
 .card-section {
   width: 100%;
-  max-width: 1200px;                   
-  aspect-ratio: 3 / 2;                 
-  background-size: cover;              
+  max-width: 1200px;
+  aspect-ratio: 3 / 2;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: top left;
-  background-color: rgba(255, 255, 255, 0.1); 
-  background-blend-mode: overlay; 
+  background-color: rgba(255, 255, 255, 0.1);
+  background-blend-mode: overlay;
   border: 3px solid rgba(255, 255, 100);
   border-radius: 15px;
   box-sizing: border-box;
   overflow: hidden;
   margin: 0 auto;
   padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-list {
@@ -21,19 +23,19 @@
   gap: 1rem;
   justify-content: flex-start;
   padding: 1rem;
-  overflow-y: auto;           
-  box-sizing: border-box;     
-  list-style-type: none;      
-  margin: 0;  
+  overflow-y: auto;
+  box-sizing: border-box;
+  list-style-type: none;
+  margin: 0;
   max-height: 100%;
-  overflow-y: auto;     
+  overflow-y: auto;
 }
 
 .card-title {
   position: sticky;
   top: 0;
   z-index: 10;
-  background-color: transparent; 
+  background-color: transparent;
   padding: 0.5rem 0 1rem;
   margin: 0;
   font-size: 2rem;
@@ -47,5 +49,49 @@
   top: 0;
   text-align: left;
   border-radius: 15px 15px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
 }
 
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sort-label {
+  color: rgb(255, 255, 100);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.sort-select {
+  background-color: rgb(101, 101, 100);
+  color: rgb(255, 255, 100);
+  border: 1px solid rgba(255, 255, 100, 0.5);
+  border-radius: 5px;
+  padding: 0.25rem 0.5rem;
+  font-family: 'Rock Salt', cursive;
+  font-size: 0.9rem;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+}
+
+.sort-select:hover {
+  background-color:  rgb(255, 255, 100);
+  color:  rgb(101, 101, 100);
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: rgb(255, 255, 100);
+  box-shadow: 0 0 0 2px rgba(255, 255, 100, 0.3);
+}
+
+.sort-select option {
+  background-color: rgba(163, 163, 162, 0.95);
+  color: rgb(255, 255, 100);
+}
