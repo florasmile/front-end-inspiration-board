@@ -1,12 +1,82 @@
-# React + Vite
+# Inspiration Board overview:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack web app for creating and managing digital inspiration boards with cards. Built with React (Vite) for the frontend and Flask (PostgreSQL) for the backend, deployed on Render.
 
-Currently, two official plugins are available:
+✨ Features
+Boards
+✅ Create a new board with a title and owner.
+✅ Validation for empty/invalid inputs.
+✅ View all boards and select one to explore.
+✅ Edit title of a board
+✅ Delete a board.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Cards
+✅ Create cards with messages (max 40 characters).
+✅ Read all cards under a selected board.
+✅ Delete unwanted cards.
+✅ +1 Feature Like cards and track votes.
+✅ Sort cards based on like counts, alphabetically, time added.
+✅ Edit card messages.
 
-## Expanding the ESLint configuration
+🛠️ Tech Stack
+Frontend
+- React (UI components)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Vite (Fast build tool)
+
+- Axios (HTTP requests)
+
+Backend
+- Flask (Python web framework)
+
+- PostgreSQL (Database)
+
+- SQLAlchemy + Alembic (ORM & migrations)
+
+- pytest (Testing)
+
+- Flask-CORS (Cross-origin support)
+
+Deployment
+- Render (Frontend & Backend Hosting)
+
+## Feature 1: Create a new board
+
+https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/CreateABoard.gif?raw=true
+
+## Feature 2: Create a new card
+
+https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/CreateANewCard.gif?raw=true
+
+## Feature 3: Increase like count
+https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/IncreaseLikeCount.gif?raw=true
+
+## Feature 4: Change mood of a board
+
+https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/MoodSelector.gif?raw=true
+
+## Feature 5: Sort cards
+
+https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/SortCards.gif?raw=true
+
+## Feature 6: Delete a board
+
+https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/DeleteABoard.gif?raw=true
+
+🔗 Links
+- Deployed URL for Front-end: [https://front-end-inspiration-board-r4rm.onrender.com](https://front-end-inspiration-board-r4rm.onrender.com/)
+- Deployed URL for Back-end: [https://back-end-inspiration-board-k7cg.onrender.com](https://back-end-inspiration-board-k7cg.onrender.com/)
+- Backend API Docs
+https://back-end-inspiration-board-k7cg.onrender.com/apidocs/#/
+
+- final presentation
+  https://www.canva.com/design/DAGskFgg8AU/778uWZ_ihYrULgERZS5RMQ/edit
+
+
+🎯 Future Improvements
+
+- User login and Authentication
+- Drag-and-Drop Card Sorting
+- Image upload for creating cards
+
+Made with ❤️ by Team Fish-Dory (Dehui, Tatyana, Marina, Mikaela)
