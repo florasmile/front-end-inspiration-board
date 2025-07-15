@@ -10,7 +10,7 @@ import SideDrawer from './components/SideDrawer';
 import { getAllBoardsApi, postBoardApi, deleteBoardApi, updateBoardApi } from './services/boardApi';
 import { postCardApi, getCardsApi, deleteCardApi, addCardLikesApi, updateCardApi } from './services/cardApi';
 
-const kDefaultBackgroundImg = `url(${new URL('./assets/default.jpg', import.meta.url).href})`;
+const kDefaultBackgroundImg = `url(${new URL('./assets/backgrounds/default.jpg', import.meta.url).href})`;
 
 const convertCardData = ({ id, likes_count, message }) => {
   const converted = { id, message, likeCount: likes_count };
@@ -167,7 +167,7 @@ function App() {
 
   const changeMood = (moodName) => {
     console.log(moodName);
-    setBackgroundImg(`url(${new URL(`./assets/${moodName}.jpg`, import.meta.url).href})`);
+    setBackgroundImg(`url(${new URL(`./assets/backgrounds/${moodName}.jpg`, import.meta.url).href})`);
   };
 
   const deleteBoard = async (id) => {
