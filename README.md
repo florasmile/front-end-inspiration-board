@@ -40,28 +40,25 @@ Backend
 Deployment
 - Render (Frontend & Backend Hosting)
 
-## Feature 1: Create a new board
+## **✨ Demo GIFs**
 
-https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/CreateABoard.gif?raw=true
+### Feature 1: Create a new board
+![Create a board demo](https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/CreateABoard.gif?raw=true)
 
-## Feature 2: Create a new card
+### Feature 2: Create a new card
+![Create a card demo](https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/CreateANewCard.gif?raw=true)
 
-https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/CreateANewCard.gif?raw=true
+### Feature 3: Increase like count
+![Like count demo](https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/IncreaseLikeCount.gif?raw=true)
 
-## Feature 3: Increase like count
-https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/IncreaseLikeCount.gif?raw=true
+### Feature 4: Change mood of a board
+![Mood selector demo](https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/MoodSelector.gif?raw=true)
 
-## Feature 4: Change mood of a board
+### Feature 5: Sort cards
+![Sort cards demo](https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/SortCards.gif?raw=true)
 
-https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/MoodSelector.gif?raw=true
-
-## Feature 5: Sort cards
-
-https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/SortCards.gif?raw=true
-
-## Feature 6: Delete a board
-
-https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/DeleteABoard.gif?raw=true
+### Feature 6: Delete a board
+![Delete board demo](https://github.com/florasmile/front-end-inspiration-board/blob/main/src/assets/demos/DeleteABoard.gif?raw=true)
 
 🔗 Links
 - Deployed URL for Front-end: [https://front-end-inspiration-board-r4rm.onrender.com](https://front-end-inspiration-board-r4rm.onrender.com/)
